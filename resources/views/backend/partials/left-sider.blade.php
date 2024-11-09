@@ -126,13 +126,28 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="pages-account-settings-notifications.html" class="menu-link">
-              <div data-i18n="Notifications">Notifications</div>
+            <a href="{{ route('seo-message') }}" class="menu-link">
+              <div data-i18n="Notifications">CEO Message</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="pages-account-settings-connections.html" class="menu-link">
-              <div data-i18n="Connections">Connections</div>
+            <a href="{{ route('about.features') }}" class="menu-link">
+              <div data-i18n="Connections">Features</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('about.buying.a.car') }}" class="menu-link">
+              <div data-i18n="Connections">Buying a Car</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('about.sell.a.car') }}" class="menu-link">
+              <div data-i18n="Connections">Selling a Car</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('about.finalize.the.sell') }}" class="menu-link">
+              <div data-i18n="Connections">Finalizing the Sale</div>
             </a>
           </li>
         </ul>
