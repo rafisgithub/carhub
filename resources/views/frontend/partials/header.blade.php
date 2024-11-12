@@ -16,7 +16,7 @@
                         <a href="#">Community</a>
                     </li>
                     <li>
-                        <a href="{{ route('cars-and-bids') }}">What’s Cars & Bids ?</a>
+                        <a href="{{ route('cars-and-bids') }}">What's Cars & Bids ?</a>
                     </li>
                     <li>
                         <a href="#">Daily Email</a>
@@ -43,8 +43,32 @@
                     <option selected value="1">English</option>
                     <option value="2">German</option>
                 </select>
-                <a href="{{ route('sell-car') }}" class="buttonv2 button">Sell a Car</a>
-                <a href="{{ route('login') }}" class="button login-btn">Sign In</a>
+                <a href="{{ route('sell-car') }}" class="buttonv2 button" style="width: 160px">Sell a Car</a>
+                @if(Auth::check())
+
+                <div class="dropdown">
+                    <a class="buttonv2 button dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ auth()->user()->name }}
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Logout Form -->
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <a class="buttonv2 button" href="{{ route('login') }}" class="btn btn-primary">Sign In</a>
+            @endif
+
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>

@@ -34,13 +34,12 @@ return new class extends Migration
 
             // How It Works
             // Buying a car
-            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 3 id = 3 for How It Works section
+            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 3 id = 3 for 
             // Selling a car
-            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 4 id = 4 for How It Works section
-            // finalize the sale
-            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 5 id = 5 for How It Works section
-
-
+            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 4 id = 4 for
+            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 5 id = 5 for
+            // frontend banner
+            ['title' => null, 'created_at' => now(), 'updated_at' => now()], // row = 6 id = 6 for
         ]);
     }
 

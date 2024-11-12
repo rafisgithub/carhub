@@ -1,17 +1,16 @@
 <?php
+
+use App\Http\Controllers\CarCategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\backend\HomeController;
 
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['isAdmin','auth','verified'])->group(function () {
 
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     Route::get('/about',[HomeController::class, 'about'])->name('about');
     Route::post('/store-about-section',[HomeController::class, 'storeAboutSection'])->name('store.about.section');
@@ -32,4 +31,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/about/finalize/the/sell',[HomeController::class,'finalizeTheSell'])->name('about.finalize.the.sell');
     Route::post('/about/finalize/the/sell',[HomeController::class,'storeFinalizeTheSell'])->name('store.finalize.the.sell');
 
+    Route::get('/about/add/social-media',[HomeController::class,'addSocialMedia'])->name('about.add.social.media.link');
+
+
+
+    Route::get('/about/frontend/banner',[HomeController::class,'frontendBanner'])->name('about.frontend.banner');
+    Route::post('/about/frontend/banner',[HomeController::class,'storeFrontendBanner'])->name('store.frontend.banner');
+
+
+    // Car Category
+    Route::resource('car-category', CarCategoryController::class);
+
+
 });
+
+

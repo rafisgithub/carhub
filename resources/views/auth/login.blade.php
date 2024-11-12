@@ -32,7 +32,7 @@
                         <!-- input--group  -->
                         <div class="input--group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="m32220@gmail.com"
+                            <input type="email" id="email" class="form-control" placeholder="rafi@gmail.com"
                                 name="email" required />
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
@@ -85,7 +85,7 @@
         </section>
         <!-- auth login area :: end  -->
     </main>
-    @include('frontend.partials.script')
+    @include('frontend.partials.scripts')
 </body>
 
 </html>

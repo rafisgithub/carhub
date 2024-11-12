@@ -22,12 +22,11 @@
     <!-- main :: end -->
 
     <!-- footer :: start  -->
-    @include('frontend.partials.footer')
+   <x-footer.footer/>
     <!-- footer :: end  -->
 
     <!-- ==== All Javascript Files ==== -->
-    @include('frontend.partials.script')
+    @include('frontend.partials.scripts')
   </body>
-  
+
 </html>
- 

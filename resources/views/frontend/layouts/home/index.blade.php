@@ -1121,7 +1121,7 @@
                   data-aos-duration="1500"
                   data-aos-delay="100"
                 >
-                  <a href="auction.html" class="button">View Auctions Result</a>
+                  <a href="{{ route('auctions') }}" class="button">View Auctions Result</a>
                 </div>
               </div>
             </div>
@@ -1129,84 +1129,7 @@
           <!-- live auctions area :: end -->
 
           <!-- why cars and bids area :: start  -->
-          <section
-            class="cars--and--bids--area"
-            style="background-image: url({{ asset('frontend/assets') }}/images/car-and-bids-bg.png)"
-          >
-            <div class="container">
-              <!-- section--title  -->
-              <div
-                class="section--title text-center"
-                data-aos="fade-in"
-                data-aos-duration="1500"
-                data-aos-delay="100"
-              >
-                <h3 class="sec--title">Why Cars & Bids?</h3>
-              </div>
-              <div class="row">
-                <div
-                  class="col-md-3 col-sm-6 mt_20"
-                  data-aos="fade-in"
-                  data-aos-duration="1200"
-                >
-                  <!-- counter box  -->
-                  <div class="counter--box first">
-                    <h4>
-                      <p class="counter">18000</p>
-                      +
-                    </h4>
-                    <p>Auctions completed</p>
-                  </div>
-                </div>
-                <div
-                  class="col-md-3 col-sm-6 mt_20"
-                  data-aos="fade-in"
-                  data-aos-duration="1200"
-                  data-aos-delay="100"
-                >
-                  <!-- counter box  -->
-                  <div class="counter--box">
-                    <h4>
-                      $
-                      <p class="counter">415</p>
-                      M+
-                    </h4>
-                    <p>Value of cars sold</p>
-                  </div>
-                </div>
-                <div
-                  class="col-md-3 col-sm-6 mt_20"
-                  data-aos="fade-in"
-                  data-aos-duration="1200"
-                  data-aos-delay="200"
-                >
-                  <!-- counter box  -->
-                  <div class="counter--box three">
-                    <h4>
-                      <p class="counter">83</p>
-                      %+
-                    </h4>
-                    <p>Sell-through rate</p>
-                  </div>
-                </div>
-                <div
-                  class="col-md-3 col-sm-6 mt_20"
-                  data-aos="fade-in"
-                  data-aos-duration="1200"
-                  data-aos-delay="300"
-                >
-                  <!-- counter box  -->
-                  <div class="counter--box">
-                    <h4>
-                      <p class="counter">510</p>
-                      K+
-                    </h4>
-                    <p>Registered members</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <x-frontend.addbanner />
           <!-- why cars and bids area :: end  -->
 
           <!-- Testimonial area :: start  -->

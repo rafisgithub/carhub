@@ -11,4 +11,6 @@
 <!-- Page CSS -->
 <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
 
+<link rel="stylesheet" href="{{ asset('backend/assets') }}/css/toastr.css" />
+
 @stack('styles')

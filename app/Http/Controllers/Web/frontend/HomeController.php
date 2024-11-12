@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarCategory;
 use App\Models\CMS;
 use App\Models\Feature;
 use Illuminate\Http\Request;
@@ -28,11 +29,24 @@ class HomeController extends Controller
         return view('frontend.layouts.cars-and-bids.cars-and-bids', compact('data', 'ceoData', 'features', 'buyingCar', 'sellingCar','finalizeTheSell'));
     }
 
-    public function sellCar() {
+    public function sellCar(Request $request) {
+        if ($request->ajax()) {
+
+            $carCats = CarCategory::all();
+
+            return response()->json([
+                'data' => $carCats
+            ]);
+        }
+
         return view('frontend.layouts.sell-car.sell-car');
     }
 
     public function getCarDetails() {
         return view('frontend.layouts.car-details.car-details');
+    }
+
+    public function storeCarInfo(Request $request) {
+       dd($request->all());
     }
 }

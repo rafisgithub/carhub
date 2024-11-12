@@ -29,6 +29,8 @@
                     </div>
                     <form action="{{ route('register') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
+
+
                         <!-- input--group  -->
                         <div class="input--group">
                             <label for="fname">Full Name</label>
@@ -108,7 +110,7 @@
         </section>
         <!-- auth login area :: end  -->
     </main>
-    @include('frontend.partials.script')
+    @include('frontend.partials.scripts')
 </body>
 
 </html>

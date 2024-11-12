@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">{{ session('success') }}</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="fw-light">{{ session('success') }}</h4>
 
     <!-- Basic Layout -->
     <div class="row">
@@ -23,19 +23,30 @@
               <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Title</label>
                 <input type="text" name="title" class="form-control" id="basic-default-fullname" placeholder="Title" value="{{ $data->title }}"/>
+                @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="mb-3">
                 <label class="form-label" for="basic-default-message">Description</label>
 
-                    <textarea name="description" id="editor" >{!! $data->content !!}</textarea>
-
+                    <textarea name="content" id="editor" >{!! $data->content !!}</textarea>
+                    @error('content')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
               </div>
               <div class="mb-3">
-                  <label for="Image">CEO profile</label>
-                    <input type="file" name="image" class="form-control" id="Image">
-                    <img src="{{ asset( $data->image ) }}" alt="">
-              </div>
+                <label for="Image">Image</label>
+                  <input type="file" name="image" class="form-control" id="Image" value="{{ $data->image }}">
+                  <img src="{{ $data->image }}" alt="">
+                  <div class="text-danger">
+                      @error('image')
+                          {{ $message }}
+
+                      @enderror
+                  </div>
+            </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>

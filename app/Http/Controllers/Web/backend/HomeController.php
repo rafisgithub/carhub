@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Web\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarValidation;
 use App\Models\CMS;
 use App\Models\Feature;
+use App\Models\socialMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Yajra\DataTables\Facades\DataTables;
 
 class HomeController extends Controller
 {
@@ -20,11 +23,11 @@ class HomeController extends Controller
     }
 
     public function storeAboutSection(Request $request) {
-    //  dd($request->all());
+
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'content' => 'required',
+            'image' => 'image|nullable',
         ]);
 
         $image = null;
@@ -37,28 +40,30 @@ class HomeController extends Controller
         }
 
 
+
         $data = CMS::where('id', $request->value)->first();
         if ($data) {
 
             $fileToDelete2 = public_path($data->image);
 
 
-            if ($data->image != null && file_exists($fileToDelete2))
+            if ($image && $data->image != null && file_exists($fileToDelete2))
             {
                 unlink($fileToDelete2);
             }
-            $data->update([
-                'title' => $request->title,
-                'content' => $request->description,
-                'image' => $image,
-            ]);
-        } else {
+            if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'image' => $image,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                ]);
+            }
 
-            CMS::create([
-                'title' => $request->title,
-                'content' => $request->description,
-                'image' => $image,
-            ]);
         }
 
         return redirect()->route('about')->with('success', 'About section updated successfully');
@@ -74,7 +79,7 @@ class HomeController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $image = null;
@@ -90,22 +95,23 @@ class HomeController extends Controller
         // dd($data);
         if($data) {
             $fileToDelete2 = public_path($data->image);
-            if ($data->image != null && file_exists($fileToDelete2))
+            if ($image && $data->image != null && file_exists($fileToDelete2))
             {
                 unlink($fileToDelete2);
             }
 
-            $data->update([
-                'title' => $request->title,
-                'content' => $request->description,
-                'image' => $image,
-            ]);
-        }else{
-            CMS::create([
-                'title' => $request->title,
-                'content' => $request->description,
-                'image' => $image,
-            ]);
+            if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->description,
+                    'image' => $image,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->description,
+                ]);
+            }
         }
         return redirect()->route('seo-message')->with('success', 'CEO message updated successfully');
     }
@@ -156,10 +162,10 @@ class HomeController extends Controller
             'title' => 'required',
             'content' => 'required',
             'url' => 'required',
-            'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        $banner = null;
         if($request->hasFile('banner')) {
             $randomize = rand(111111, 999999);
             $extension = $request->file('banner')->getClientOriginalExtension();
@@ -167,6 +173,7 @@ class HomeController extends Controller
             $request->file('banner')->move('cms/about/buy-a-car/banner/', $filename);
             $banner = 'cms/about/buy-a-car/banner/' . $filename;
         }
+        $image = null;
         if($request->hasFile('image')) {
             $randomize = rand(111111, 999999);
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -180,32 +187,46 @@ class HomeController extends Controller
         if($data) {
             $imageToDelete = public_path($data->image);
             $bannerToDel = public_path($data->banner);
-            if ($data->image != null && file_exists($imageToDelete))
+            if ($image && $data->image != null && file_exists($imageToDelete))
             {
                 unlink($imageToDelete);
             }
-            if ($data->banner != null && file_exists($bannerToDel))
+            if ($banner && $data->banner != null && file_exists($bannerToDel))
             {
                 unlink($bannerToDel);
             }
 
-            $data->update([
-                'title' => $request->title,
-                'content' => $request->content,
-                'url' => $request->url,
-                'banner' => $banner,
-                'image' => $image,
-            ]);
+           if($image && $banner) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'url' => $request->url,
+                    'image' => $image,
+                    'banner' => $banner,
+                ]);
+            }else if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'url' => $request->url,
+                    'image' => $image,
+                ]);
+            }else if($banner) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'url' => $request->url,
+                    'banner' => $banner,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'url' => $request->url,
+                ]);
+            }
         }
-        else {
-            CMS::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'url' => $request->url,
-                'banner' => $banner,
-                'image' => $image,
-            ]);
-        }
+
         $data = CMS::where('id', $request->value)->first();
 
         return redirect()->route('about.buying.a.car')->with('success', 'Buying a car info updated successfully', compact('data'));
@@ -226,10 +247,10 @@ class HomeController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-
+        $image = null;
         if($request->hasFile('image')) {
             $randomize = rand(111111, 999999);
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -243,25 +264,24 @@ class HomeController extends Controller
         if($data) {
             $imageToDelete = public_path($data->image);
             $bannerToDel = public_path($data->banner);
-            if ($data->image != null && file_exists($imageToDelete))
+            if ($image && $data->image != null && file_exists($imageToDelete))
             {
                 unlink($imageToDelete);
             }
-
-
-            $data->update([
-                'title' => $request->title,
-                'content' => $request->content,
-                'image' => $image,
-            ]);
+            if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'image' => $image,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                ]);
+            }
         }
-        else {
-            CMS::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'image' => $image,
-            ]);
-        }
+
         $data = CMS::where('id', $request->value)->first();
         return redirect()->route('about.sell.a.car')->with('success', 'Selling a car info updated successfully', compact('data'));
     }
@@ -273,12 +293,13 @@ class HomeController extends Controller
 
 
     public function storeFinalizeTheSell(Request $request) {
+
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        $image = null;
         if($request->hasFile('image')) {
             $randomize = rand(111111, 999999);
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -291,14 +312,106 @@ class HomeController extends Controller
 
         if($data) {
             $imageToDelete = public_path($data->image);
-            $bannerToDel = public_path($data->banner);
-            if ($data->image != null && file_exists($imageToDelete))
+
+            if ($image && $data->image != null && file_exists($imageToDelete))
             {
                 unlink($imageToDelete);
+            }
+
+            if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'image' => $image,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                ]);
             }
 
             return redirect()->route('about.finalize.the.sell')->with('success', 'Finalize the sell info updated successfully');
         }
 
     }
+
+
+    public function addSocialMedia(Request $request) {
+        if ($request->ajax()) {
+
+            $data = socialMedia::where('status', 1)->get();
+            return DataTables::of($data)
+
+                    ->addIndexColumn()
+
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            return $btn;
+
+                    })
+
+                    ->rawColumns(['action'])
+
+                    ->make(true);
+
+        }
+
+        return view('backend.layouts.about.add-social-media');
+    }
+
+    public function frontendBanner() {
+        $data = CMS::where('id', '6')->first();
+        // dd($data);
+        return view('backend.layouts.about.frontend-banner', compact('data'));
+    }
+
+    public function storeFrontendBanner (Request $request) {
+        // dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $image = null;
+
+        if($request->hasFile('image')) {
+            $randomize = rand(111111, 999999);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $randomize . '.' . $extension;
+            $request->file('image')->move('cms/about/frontend/banner/', $filename);
+            $image = 'cms/about/frontend/banner/' . $filename;
+        }
+
+        $data = CMS::where('id', $request->value)->first();
+
+        if($data) {
+            $imageToDelete = public_path($data->image);
+
+            if ($image && $data->image != null && file_exists($imageToDelete))
+            {
+                unlink($imageToDelete);
+            }
+
+            if($image) {
+                $data->update([
+                    'title' => $request->title,
+                    'image' => $image,
+                ]);
+            }else {
+                $data->update([
+                    'title' => $request->title,
+                ]);
+            }
+
+            $data = CMS::where('id', $request->value)->first();
+
+            return redirect()->route('about.frontend.banner')->with('success', 'Frontend banner updated successfully', compact('data'));
+        }
+    }
+
+
+
+
 }

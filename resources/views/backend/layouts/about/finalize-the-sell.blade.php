@@ -16,7 +16,7 @@
             <small class="text-muted float-end">Default label</small>
           </div>
           <div class="card-body">
-            <form method="POST" action="{{ route('store.a.car.content') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('store.finalize.the.sell') }}" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" value="5" name="value">
