@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\frontend\CarInformationController;
 use App\Http\Controllers\Web\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,7 @@ Route::middleware('auth','verified')->group(function () {
 
 
 
-    Route::post('/store/car/info',[HomeController::class,'storeCarInfo'])->name('store.car.information');
-
+    Route::resource('cars', CarInformationController::class);
 });
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use App\Models\CarCategory;
+use App\Models\CarTransmission;
 use App\Models\CMS;
 use App\Models\Feature;
 use Illuminate\Http\Request;
@@ -11,12 +13,18 @@ use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
+    public $allcars;
+    public $carCategories,$carTransmissions;
     public function index()
     {
         return view('frontend.layouts.home.index');
     }
     public function auctions() {
-        return view('frontend.layouts.auctions.auctions');
+        $this->allcars = Car::where('status', 1)->get();
+
+        return view('frontend.layouts.auctions.auctions',[
+            'allcars' => $this->allcars,
+        ]);
     }
 
     public function getCarsAndbid() {
@@ -30,12 +38,14 @@ class HomeController extends Controller
     }
 
     public function sellCar(Request $request) {
+
         if ($request->ajax()) {
-
-            $carCats = CarCategory::all();
-
+            $this->carCategories = CarCategory::all();
+            $this->carTransmissions = CarTransmission::all();
             return response()->json([
-                'data' => $carCats
+                'carCats' =>  $this->carCategories,
+                'carTrans' => $this->carTransmissions
+
             ]);
         }
 
@@ -46,7 +56,4 @@ class HomeController extends Controller
         return view('frontend.layouts.car-details.car-details');
     }
 
-    public function storeCarInfo(Request $request) {
-       dd($request->all());
-    }
 }

@@ -169,29 +169,24 @@
         </ul>
       </li>
       <!-- Components -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Car</span></li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">About Car</span></li>
       <!-- Cards -->
-      <li class="menu-item">
-        <a href="{{ route('car-category.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Add Category</div>
-        </a>
-      </li>
+
       <!-- User interface -->
       <li class="menu-item">
         <a href="javascript:void(0)" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-box"></i>
-          <div data-i18n="User interface">User interface</div>
+          <div data-i18n="User interface">Car Information</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
-            <a href="ui-accordion.html" class="menu-link">
-              <div data-i18n="Accordion">Accordion</div>
+            <a href="{{ route('car-category.index') }}" class="menu-link">
+              <div data-i18n="Accordion">Add Category</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="ui-alerts.html" class="menu-link">
-              <div data-i18n="Alerts">Alerts</div>
+            <a href="{{ route('car-transmission.index') }}" class="menu-link">
+              <div data-i18n="Alerts">Car Transmission</div>
             </a>
           </li>
           <li class="menu-item">

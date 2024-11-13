@@ -37,6 +37,10 @@
                             <input type="text" id="fname" class="form-control" placeholder="Enter your full name"
                                 name="name" required />
                             <div class="invalid-feedback">Please enter your full name.</div>
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+
+                            @enderror
                         </div>
                         <!-- input--group  -->
                         <div class="input--group">
@@ -46,6 +50,9 @@
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!-- input--group  -->
                         <div class="input--group password">
@@ -62,6 +69,9 @@
                                 <div class="invalid-feedback">
                                     Please enter your password.
                                 </div>
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!-- input--group  -->
@@ -79,6 +89,10 @@
                                 <div class="invalid-feedback">
                                     Please retype your password.
                                 </div>
+                                @error('password_confirmation')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
                         <!-- forgot pass area  -->

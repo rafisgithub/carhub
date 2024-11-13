@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\CarCategoryController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\backend\HomeController;
-
+use App\Http\Controllers\Web\backend\CarCategoryController;
+use App\Http\Controllers\Web\backend\TransmissionController;
 
 
 Route::middleware(['isAdmin','auth','verified'])->group(function () {
@@ -42,6 +41,8 @@ Route::middleware(['isAdmin','auth','verified'])->group(function () {
     // Car Category
     Route::resource('car-category', CarCategoryController::class);
 
+    // Car Transmission
+    Route::resource('car-transmission', TransmissionController::class);
 
 });
 

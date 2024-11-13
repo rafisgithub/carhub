@@ -1,178 +1,137 @@
 @extends('backend.app')
 
-@section('title', 'Home')
+@section('title', 'Transmission')
 
 @section('content')
+    <div class="container-xxl flex-grow-1 container-p-y">
 
-<div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="alert">{{ session('success') }}</h4>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           Car Category
+        </button>
 
-    <!-- Modal Structure -->
-    <div class="modal fade" id="editCarCategoryModal" tabindex="-1" aria-labelledby="editCarCategoryModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editCarCategoryModalLabel">Edit Car Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form inside modal -->
-                    <form id="editCarCategoryForm">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="id" id="categoryId">
-                        <div class="mb-3">
-                            <label for="categoryName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="categoryName" name="category" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="CarCategoryForm">
+                            <input type="hidden" name="id" id="HidenInput">
+                            <div class="mb-3">
+                                <input id="CarCategoryInput" type="text" class="form-control" placeholder="Car Category" name="category">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="submitCarCategoryForm">Add</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <table class="table table-bordered table-dark data-table ">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Car Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
     </div>
-
-    <!-- Basic Layout -->
-    <div class="row">
-        <div class="col-xl">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Basic Layout</h5>
-                    <small class="text-muted float-end">Default label</small>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('car-category.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <labe class="form-label" for="basic-default-message">Add Category</label>
-                                <input type="text" name="category" class="form-control" placeholder="Category">
-                        </div>
-
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-
-
-
-            <table class="table table-bordered table-dark data-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Category</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-</div>
-
-
 @endsection
 
-
 @push('scripts')
+    <script>
+        $(document).ready(function() {
 
-<script>
-$(function() {
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('car-category.index') }}",
-        columns: [{
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'category',
-                name: 'category'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
-            },
 
-        ]
-    });
-});
+            $("#submitCarCategoryForm").click(function(event) {
+                event.preventDefault();
 
-function editCarCategoryModal(button) {
-    var categoryId = $(button).data('id');
-    var categoryName = $(button).data('category');
+                let form = $("#CarCategoryForm");
+                let url, type;
 
-    $('#categoryId').val(categoryId);
-    $('#categoryName').val(categoryName);
-
-    $('#editCarCategoryModal').modal('show');
-}
-
-$(document).ready(function() {
-
-    $('#editCarCategoryForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = $(this).serialize();
-
-        $.ajax({
-            url: '{{ route('car-category.update', ': id ') }}'.replace(':id', $('#categoryId').val()),
-            method: 'PUT',
-            data: formData,
-            success: function(response) {
-                if (response.status == 200) {
-                    $('#editCarCategoryModal').modal('hide');
-
-                    $('.data-table').DataTable().ajax.reload();
-
-                    toastr.success(response.message);
+                let transmissionId = $('#HidenInput').val();
+                if (transmissionId) {
+                    url = "{{ route('car-category.update', ':id') }}".replace(':id', transmissionId);
+                    type = "PUT";
                 } else {
-                    toastr.error(response.message);
+                    url = "{{ route('car-category.store') }}";
+                    type = "POST";
                 }
 
-            },
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: form.serialize(),
+                    success: function(response) {
+                        toastr.success(response.message);
+                        $('#exampleModal').modal('hide');
+                        $('#CarCategoryForm').trigger("reset");
+                        $('#submitCarCategoryForm').text('Add');
+                        $('.data-table').DataTable().ajax.reload();
+                    },
+                    error: function(data) {
+                        alert("Error occurred while submitting the form");
+                    }
+                });
+            });
 
+
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('car-category.index') }}",
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'category', name: 'category' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                ]
+            });
         });
-    });
-});
 
 
-
-function hapus(e) {
-    var url = '{{ route("car-category.destroy", ":id") }}';
-    url = url.replace(':id', e);
-    Swal.fire({
-        title: "Delete",
-        text: "Do you realy want to delete!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yep, Delete this item!"
-    }).then((result) => {
-        if (result.value) {
-            $.ajax({
-                url: url,
-                type: "delete",
-                success: function(response) {
-                    toastr.success(response.message);
-                    $('.data-table').DataTable().ajax.reload();
-                }
-            })
+        function EditCarTransmission(id, category) {
+            $('#HidenInput').val(id);
+            $('#CarCategoryInput').val(category);
+            $('#submitCarCategoryForm').text('Update');
+            $('#exampleModal').modal('show');
         }
-    })
-}
-</script>
 
-
-
+        function DeleteCarTransmission(id)
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('car-category.destroy', ':id') }}".replace(':id', id),
+                        success: function(response) {
+                            toastr.success(response.message);
+                            $('.data-table').DataTable().ajax.reload();
+                        },
+                        error: function(data) {
+                            alert("Error occurred while deleting the data");
+                        }
+                    });
+                }
+            });
+        }
+        </script>
 @endpush

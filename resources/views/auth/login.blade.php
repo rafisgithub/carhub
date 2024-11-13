@@ -37,6 +37,9 @@
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!-- input--group  -->
                         <div class="input--group password">
@@ -53,6 +56,9 @@
                                 <div class="invalid-feedback">
                                     Please enter your password.
                                 </div>
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!-- forgot pass area  -->
