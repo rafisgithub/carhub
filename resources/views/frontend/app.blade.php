@@ -7,7 +7,7 @@
     <!-- ==== Favicon ==== -->
     <link rel="icon" type="image/png" href="assets/images/logo-sm.svg" />
     <!-- ==== All Css Links ==== -->
-    @include('frontend.partials.style')
+    @include('frontend.partials.styles')
   </head>
 
   <body>

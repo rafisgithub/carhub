@@ -23,11 +23,9 @@ class CarCategoryController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action',function($carCategory){
                         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-id="' . $carCategory->id . '" data-category="' . $carCategory->category . '" onclick="editCarCategoryModal(this)">Edit</a>';
-                        $btn = $btn .= ' <form id="deleteCarCategoryForm" action="'. route('car-category.destroy', $carCategory->id) .'" method="POST" style="display:inline;" onsubmit="return confirm(\'Are you sure?\')">
-                        '. csrf_field() . method_field('DELETE') .'
-                        <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
-                      </form>';
-
+                        $btn = $btn . ' 
+                       <a href="javascript:void(0)" class="btn btn-danger btn-sm" title="Hapus User" onclick="hapus('.$carCategory->id.')" >Delete</a>';
+                    
                         return $btn;
                     })
 
@@ -113,6 +111,9 @@ class CarCategoryController extends Controller
         // dd($carCategory);
         $carCategory->delete();
 
-        return redirect()->back()->with('success', 'Car Category Deleted Successfully.');
+        return response()->json([
+            'status' => true,
+            'message' => "Deleted successfully"
+        ]);
     }
 }

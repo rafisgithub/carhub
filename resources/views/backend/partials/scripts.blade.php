@@ -37,6 +37,7 @@
 <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 </script>
 <script src="{{ asset('backend/assets') }}/js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
@@ -122,6 +123,14 @@
             };
             toastr.warning("{{ session('t-warning') }}");
         @endif
+    });
+
+
+
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
 </script>
 

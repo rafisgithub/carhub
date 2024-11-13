@@ -2965,3 +2965,10 @@ footer .social--icons li a:hover svg path {
 .show {
   display: block;
 }
+
+
+input::placeholder {
+  color: grey;
+  opacity: 0.1;  
+  font-style: italic; 
+}
