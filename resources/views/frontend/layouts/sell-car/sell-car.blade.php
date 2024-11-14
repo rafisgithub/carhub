@@ -9,7 +9,7 @@ Sell Car
     <!-- overlay  -->
     <div class="overlay"></div>
     <!-- sell car hero area :: start  -->
-    <section class="sell--car--hero--area" style="background-image: url( {{ asset('frontend/assets') }}/sell-hero-bg.png)">
+    <section class="sell--car--hero--area" style="background-image: url( {{ asset('frontend/assets') }}images/sell-hero-bg.png)">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -927,7 +927,7 @@ Sell Car
     <div class="car--stepform--popup">
         <!-- top logo area  -->
         <div class="top--logo--area">
-            <img src=" {{ asset('frontend/assets') }}/logo.svg" alt="logo" />
+            <img src=" {{ asset('frontend/assets') }}/images/logo.svg" alt="logo" />
             <div class="text--content mt_25">
                 <h3>Tell us about your car</h3>
                 <p>

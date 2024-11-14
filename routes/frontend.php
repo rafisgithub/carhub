@@ -5,6 +5,8 @@ use App\Http\Controllers\Web\frontend\CarInformationController;
 use App\Http\Controllers\Web\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Web\frontend\UserInforamationController;
+
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
@@ -24,6 +26,11 @@ Route::middleware('auth','verified')->group(function () {
 
 
     Route::resource('cars', CarInformationController::class);
+
+    // user profile routes
+
+    Route::get('user-profile',[UserInforamationController::class,'userProfile'])->name('profile.index');
+    Route::post('user/store/profile',[UserInforamationController::class,'updateProfile'])->name('user.store.profile');
 });
 
 
