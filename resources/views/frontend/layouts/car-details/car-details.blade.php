@@ -17,10 +17,9 @@
                 data-aos-duration="1500"
               >
                 <div>
-                  <h1>1987 Toyota Cressida</h1>
+                  <h1>{{ $carDetails->model }}</h1>
                   <p>
-                    Supra-Sourced 6-Cylinder Swap, 5-Speed Manual,
-                    California-Owned
+                  {{ $carDetails->manufacturer }} | {{ $carDetails->carCategory->category }} | {{ $carDetails->carTransmission->transmission_type }}
                   </p>
                 </div>
                 <div class="btn--group">
@@ -343,7 +342,7 @@
                 <!-- title  -->
                 <div class="title">
                   <h3>Carfax Car Center</h3>
-                  <p>Ending May 10th at 11:42 PM</p>
+                  <p>Ending {{ \Carbon\Carbon::parse($carDetails->auctionTime->end_time)->format('F jS') }} at {{ \Carbon\Carbon::parse($carDetails->auctionTime->end_time)->format('h:i A') }}</p>
                 </div>
                 <!-- table  -->
                 <div class="table--wrapper">
@@ -351,34 +350,34 @@
                   <div class="table">
                     <div class="tr">
                       <div class="tt">Make</div>
-                      <div class="td">Lotus</div>
+                      <div class="td">{{ $carDetails->manufacturer }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">Model</div>
-                      <div class="td">Emira</div>
+                      <div class="td">{{ $carDetails->model }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">Mileage</div>
-                      <div class="td">25</div>
+                      <div class="td">{{ $carDetails->mileage }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">VIN Number</div>
-                      <div class="td">SCCLEKAX5RHA106</div>
+                      <div class="td">{{ $carDetails->vin_number }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">Title Status</div>
-                      <div class="td">Clean (PA)</div>
+                      <div class="td">{{ $carDetails->title_status }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">Location</div>
-                      <div class="td">Lewistown, PA 1704</div>
+                      <div class="td">{{ $carDetails->location }}</div>
                     </div>
                     <div class="tr seller">
                       <div class="tt">Seller</div>
                       <div class="td">
                         <div class="s-profile">
                           <img  src=" {{ asset('frontend/assets') }}/images/about.png" alt="" />
-                          Spike944
+                         {{ $carDetails->user->name }}
                         </div>
                         <a href="#">Contact</a>
                       </div>
@@ -396,7 +395,7 @@
                     </div>
                     <div class="tr">
                       <div class="tt">Transmission</div>
-                      <div class="td">Manual (6-Speed)</div>
+                      <div class="td">{{ $carDetails->carTransmission->transmission_type }}</div>
                     </div>
                     <div class="tr">
                       <div class="tt">Body Style</div>

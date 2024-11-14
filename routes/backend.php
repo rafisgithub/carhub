@@ -1,49 +1,65 @@
 <?php
 
+use App\Http\Controllers\Web\backend\CarManageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\backend\HomeController;
 use App\Http\Controllers\Web\backend\CarCategoryController;
+use App\Http\Controllers\Web\backend\SellerTypeController;
 use App\Http\Controllers\Web\backend\TransmissionController;
 
+// Admin Middleware
+Route::middleware(['isAdmin', 'auth', 'verified'])->group(function () {
 
-Route::middleware(['isAdmin','auth','verified'])->group(function () {
+    Route::controller(HomeController::class)->group(function() {
+        // Dashboard Route
+        Route::get('/dashboard', 'index')->name('dashboard');
 
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+        // About section routes
+        Route::prefix('about')->group(function() {
+            Route::get('/', 'about')->name('about');
+            Route::post('/store-section', 'storeAboutSection')->name('store.about.section');
 
-    Route::get('/about',[HomeController::class, 'about'])->name('about');
-    Route::post('/store-about-section',[HomeController::class, 'storeAboutSection'])->name('store.about.section');
+            // Features
+            Route::get('/features', 'aboutFeatures')->name('about.features');
+            Route::post('/store/features', 'storeAboutFeatures')->name('store.features');
 
-    Route::get('/seo-message',[HomeController::class,'ceoMessage'])->name('seo-message');
-    Route::post('/store-seo-message',[HomeController::class,'storeCeoMessage'])->name('store.ceo.message');
+            // Buying a Car
+            Route::get('/buy-a-car', 'buyingACar')->name('about.buying.a.car');
+            Route::post('/buy-a-car', 'SaveBuyingCarInfo')->name('buying.a.car');
 
-    Route::get('/about/features',[HomeController::class,'aboutFeatures'])->name('about.features');
-    Route::post('/store/features',[HomeController::class,'storeAboutFeatures'])->name(('store-features'));
+            // Selling a Car
+            Route::get('/sell-a-car', 'sellACar')->name('about.sell.a.car');
+            Route::post('/sell-a-car', 'SaveSellCarInfo')->name('store.a.car.content');
 
-    Route::get('/about/buy-a-car',[HomeController::class,'buyingACar'])->name('about.buying.a.car');
-    Route::post('/about/buy-a-car',[HomeController::class,'SaveBuyingCarInfo'])->name('buying.a.car');
+            // Finalizing the Sell
+            Route::get('/finalize/the/sell', 'finalizeTheSell')->name('about.finalize.the.sell');
+            Route::post('/finalize/the/sell', 'storeFinalizeTheSell')->name('store.finalize.the.sell');
 
-    Route::get('/about/sell-a-car',[HomeController::class,'sellACar'])->name('about.sell.a.car');
-    Route::post('/about/sell-a-car',[HomeController::class,'SaveSellCarInfo'])->name('store.a.car.content');
+            // Social Media Link
+            Route::get('/add/social-media', 'addSocialMedia')->name('about.add.social.media.link');
 
+            // Frontend Banner
+            Route::get('/frontend/banner', 'frontendBanner')->name('about.frontend.banner');
+            Route::post('/frontend/banner', 'storeFrontendBanner')->name('store.frontend.banner');
+        });
 
-    Route::get('/about/finalize/the/sell',[HomeController::class,'finalizeTheSell'])->name('about.finalize.the.sell');
-    Route::post('/about/finalize/the/sell',[HomeController::class,'storeFinalizeTheSell'])->name('store.finalize.the.sell');
-
-    Route::get('/about/add/social-media',[HomeController::class,'addSocialMedia'])->name('about.add.social.media.link');
-
-
-
-    Route::get('/about/frontend/banner',[HomeController::class,'frontendBanner'])->name('about.frontend.banner');
-    Route::post('/about/frontend/banner',[HomeController::class,'storeFrontendBanner'])->name('store.frontend.banner');
-
+        // SEO message routes
+        Route::prefix('seo')->group(function() {
+            Route::get('/message', 'ceoMessage')->name('seo-message');
+            Route::post('/store-message', 'storeCeoMessage')->name('store.ceo.message');
+        });
+    });
 
     // Car Category
     Route::resource('car-category', CarCategoryController::class);
 
     // Car Transmission
     Route::resource('car-transmission', TransmissionController::class);
+    // Seller Type
+    Route::resource('seller-type', SellerTypeController::class);
 
+    // Car Management Routes
+    Route::resource('car-management', CarManageController::class);
+    Route::post('change-status/{id}',[CarManageController::class,'changeStatus'])->name('change.status');
 });
-
-

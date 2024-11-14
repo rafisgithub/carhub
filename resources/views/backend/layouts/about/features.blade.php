@@ -10,7 +10,7 @@
         <h5 class="card-header">Features</h5>
             <button class="btn btn-primary" id="AddFreatues">Add Feature</button>
         <div class="card-body">
-            <form action="{{ route('store-features') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('store.features') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div id="form-append">
                     <h2>Feature 1</h2>

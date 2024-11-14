@@ -58,7 +58,7 @@ class CarInformationController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = $randomize . '.' . $extension;
             $request->file('image')->move('car/images/', $filename);
-            $image = 'car/images' . $filename;
+            $image = 'car/images/' . $filename;
         }
 
 
@@ -88,8 +88,8 @@ class CarInformationController extends Controller
         $this->car->bit_price = $request->bit_price;
         $this->car->image = $image;
         $this->car->save();
- 
-        return redirect()->route('auctions')->with('success', 'Car information added successfully');
+
+        return redirect()->route('auctions')->with('t-success', 'Car Registration successful!');
     }
 
     /**
