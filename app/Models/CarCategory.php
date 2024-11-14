@@ -13,6 +13,13 @@ class CarCategory extends Model
         return [
             'category' => 'string',
         ];
+
+
+    }
+
+    public function car()
+    {
+        return $this->hasMany(related: Car::class);
     }
 
 }

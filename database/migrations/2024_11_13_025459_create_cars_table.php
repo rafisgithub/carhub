@@ -26,9 +26,9 @@ return new class extends Migration
             $table->string('mileage');
             $table->string('equipment');
             $table->boolean('is_modified');
-            $table->text('modification_details');
+            $table->text('modification_details')->nullable();
             $table->boolean('is_any_mechanical_cosmetic_flaws');
-            $table->text('mechanical_cosmetic_flaws_details');
+            $table->text('mechanical_cosmetic_flaws_details')->nullable();
             $table->string('location');
             $table->boolean('is_sales_elsewhere');
             $table->string('title_location');

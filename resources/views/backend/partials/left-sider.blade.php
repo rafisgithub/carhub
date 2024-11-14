@@ -190,13 +190,13 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="ui-badges.html" class="menu-link">
-              <div data-i18n="Badges">Badges</div>
+            <a href="{{ route('car-management.index') }}" class="menu-link">
+              <div data-i18n="Badges">Manage Car</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="ui-buttons.html" class="menu-link">
-              <div data-i18n="Buttons">Buttons</div>
+            <a href="{{ route('seller-type.index') }}" class="menu-link">
+              <div data-i18n="Buttons">Seller Type</div>
             </a>
           </li>
           <li class="menu-item">

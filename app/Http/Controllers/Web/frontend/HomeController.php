@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\Web\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuctionTime;
 use App\Models\Car;
 use App\Models\CarCategory;
 use App\Models\CarTransmission;
 use App\Models\CMS;
 use App\Models\Feature;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
-    public $allcars;
-    public $carCategories,$carTransmissions;
+    public $allcars,$auctionTime,$carCategories,$carTransmissions,$carDetails;
     public function index()
     {
-        return view('frontend.layouts.home.index');
+        $this->allcars = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->where('status', 1)->get();
+
+        return view('frontend.layouts.home.index',[
+            'allcars' => $this->allcars,
+        ]);
     }
     public function auctions() {
         $this->allcars = Car::where('status', 1)->get();
@@ -52,8 +57,12 @@ class HomeController extends Controller
         return view('frontend.layouts.sell-car.sell-car');
     }
 
-    public function getCarDetails() {
-        return view('frontend.layouts.car-details.car-details');
+    public function getCarDetails($id) {
+        $this->carDetails = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->with('user')->where('id',$id)->first();
+        // dd($this->carDetails);
+        return view('frontend.layouts.car-details.car-details',[
+            'carDetails' => $this->carDetails,
+        ]);
     }
 
 }

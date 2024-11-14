@@ -6,6 +6,15 @@
 
 @section('content')
     <!-- live auctions area :: start -->
+
+
+    @if(session("t-success"))
+        <script type="text/javascript">
+        toastr.success("{{ session("t-success") }}");
+        <script>
+    @endif
+
+
     <section class="live--auctions--area auction--result">
         <div class="container">
             <!-- section title  -->
@@ -127,13 +136,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -169,13 +178,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -212,13 +221,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +270,7 @@
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -297,13 +306,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -340,13 +349,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -383,13 +392,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -426,13 +435,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -468,13 +477,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -511,13 +520,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -554,13 +563,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>
@@ -597,13 +606,13 @@
                                 </svg>
                             </div>
                             <div class="car--model">
-                                <a href="{{ route('car-details') }}">1987 Renault Alliance GTA Convertible</a>
+                                <a href="">1987 Renault Alliance GTA Convertible</a>
                                 <p>
                                     1 Owner, Dual-Motor AWD, Florida-Owned, Mostly Unmodified
                                 </p>
                                 <div class="card--footer">
                                     <p>Fort Lauderdale, FL 33315</p>
-                                    <a href="{{ route('car-details') }}" class="buttonv2 button">Place a Bid</a>
+                                    <a href="" class="buttonv2 button">Place a Bid</a>
                                 </div>
                             </div>
                         </div>

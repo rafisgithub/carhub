@@ -15,7 +15,7 @@ Route::middleware('auth','verified')->group(function () {
     Route::get('auctions',[HomeController::class,'auctions'])->name('auctions');
     Route::get('cars-and-bids',[HomeController::class,'getCarsAndbid'])->name('cars-and-bids');
     Route::get('sell-car',[HomeController::class,'sellCar'])->name('sell-car');
-    Route::get('car-details',[HomeController::class,'getCarDetails'])->name('car-details');
+    Route::get('showing-car-details/{id}',[HomeController::class,'getCarDetails'])->name('car.details');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
