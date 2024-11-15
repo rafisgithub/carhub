@@ -14,23 +14,27 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 
 Route::middleware('auth','verified')->group(function () {
 
-    Route::get('auctions',[HomeController::class,'auctions'])->name('auctions');
-    Route::get('cars-and-bids',[HomeController::class,'getCarsAndbid'])->name('cars-and-bids');
-    Route::get('sell-car',[HomeController::class,'sellCar'])->name('sell-car');
-    Route::get('showing-car-details/{id}',[HomeController::class,'getCarDetails'])->name('car.details');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::controller(HomeController::class)->group(function() {
+
+        Route::get('/auctions', 'auctions')->name('auctions');
+        Route::get('/cars-and-bids', 'getCarsAndbid')->name('cars-and-bids');
+        Route::get('/sell-car', 'sellCar')->name('sell-car');
+        Route::get('/showing-car-details/{id}', 'getCarDetails')->name('car.details');
+
+    });
+
 
 
 
     Route::resource('cars', CarInformationController::class);
 
     // user profile routes
+    Route::controller(UserInforamationController::class)->group(function() {
+        Route::get('user-profile', 'userProfile')->name('profile.index');
+        Route::post('user/store/profile', 'updateProfile')->name('user.store.profile');
+    });
 
-    Route::get('user-profile',[UserInforamationController::class,'userProfile'])->name('profile.index');
-    Route::post('user/store/profile',[UserInforamationController::class,'updateProfile'])->name('user.store.profile');
 });
 
 

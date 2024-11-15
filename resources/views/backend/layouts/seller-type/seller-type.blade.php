@@ -20,7 +20,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="CarSellerTypeForm">
-                            <input type="hidden" name="id" id="HidenInput">
+                            <input type="hidden" name="id" id="hiddenInput">
                             <div class="mb-3">
                                 <input id="SellerTypeInput" type="text" class="form-control" placeholder="Seller Type" name="seller_type">
                             </div>
@@ -53,85 +53,93 @@
     <script>
         $(document).ready(function() {
 
+        $("#submitCarSelerTypeFormButton").click(function(event) {
+            event.preventDefault();
 
-            $("#submitCarSelerTypeFormButton").click(function(event) {
-                event.preventDefault();
+            let form = $("#CarSellerTypeForm");
+            let url, type;
 
-                let form = $("#CarSellerTypeForm");
-                let url, type;
+            let sellerTypeId = $('#hiddenInput').val();
 
-                let seller_type_id = $('#HidenInput').val();
-                if (seller_type_id) {
-                    url = "{{ route('seller-type.update', ':id') }}".replace(':id', seller_type_id);
-                    type = "PUT";
-                } else {
-                    url = "{{ route('seller-type.store') }}";
-                    type = "POST";
+            if (sellerTypeId) {
+                $('#hiddenInput').val('');
+                url = "{{ route('seller-type.update', ':id') }}".replace(':id', sellerTypeId);
+                type = "PUT";
+            } else {
+                
+                url = "{{ route('seller-type.store') }}";
+                type = "POST";
+            }
+
+            $.ajax({
+                type: type,
+                url: url,
+                data: form.serialize(),
+                success: function(response) {
+                    toastr.success(response.message);
+                    $('#exampleModal').modal('hide');
+                    $('#CarSellerTypeForm').trigger("reset");
+                    $('#submitCarSelerTypeFormButton').text('Add');
+                    $('hiddenInput').val('');
+                    $('.data-table').DataTable().ajax.reload();
+                },
+                error: function(data) {
+                    alert("Error occurred while submitting the form");
                 }
-
-                $.ajax({
-                    type: type,
-                    url: url,
-                    data: form.serialize(),
-                    success: function(response) {
-                        toastr.success(response.message);
-                        $('#exampleModal').modal('hide');
-                        $('#CarSellerTypeForm').trigger("reset");
-                        $('#submitCarSelerTypeFormButton').text('Add');
-                        $('.data-table').DataTable().ajax.reload();
-                    },
-                    error: function(data) {
-                        alert("Error occurred while submitting the form");
-                    }
-                });
-            });
-
-
-            var table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('seller-type.index') }}",
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'seller_type', name: 'seller_type' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false },
-                ]
             });
         });
 
 
-        function EditSellerType(id, seller_type) {
-            $('#HidenInput').val(id);
-            $('#SellerTypeInput').val(seller_type);
-            $('#submitCarSelerTypeFormButton').text('Update');
-            $('#exampleModal').modal('show');
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('seller-type.index') }}",
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'seller_type', name: 'seller_type' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ]
+        });
+        });
+
+
+        function EditSellerType(id, seller_type)
+        {
+        $('#hiddenInput').val(id);
+        $('#SellerTypeInput').val(seller_type);
+
+        $('#submitCarSelerTypeFormButton').text('Update');
+        $('#exampleModal').modal('show');
         }
+
 
         function DeleteSellerType(id)
         {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: "{{ route('seller-type.destroy', ':id') }}".replace(':id', id),
-                        success: function(response) {
-                            toastr.success(response.message);
-                            $('.data-table').DataTable().ajax.reload();
-                        },
-                        error: function(data) {
-                            alert("Error occurred while deleting the data");
-                        }
-                    });
-                }
-            });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ route('seller-type.destroy', ':id') }}".replace(':id', id),
+                    success: function(response) {
+                        toastr.success(response.message);
+                        $('.data-table').DataTable().ajax.reload();
+                    },
+                    error: function(data) {
+                        alert("Error occurred while deleting the data");
+                    }
+                });
+            }
+        });
         }
-        </script>
+
+        
+    </script>
 @endpush

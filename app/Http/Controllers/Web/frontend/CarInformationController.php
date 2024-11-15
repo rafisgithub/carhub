@@ -30,10 +30,11 @@ class CarInformationController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $request->validate([
             'category_id' => 'required',
             'transmission_id' => 'required',
+            'seller_type_id' => 'required',
             'full_name' => 'required',
             'contact_number' => 'required',
             'vin_number' => 'required',
@@ -65,6 +66,8 @@ class CarInformationController extends Controller
         $this->car->user_id = auth()->user()->id;
         $this->car->car_category_id = $request->category_id;
         $this->car->car_transmission_id = $request->transmission_id;
+        $this->car->seller_type_id = $request->seller_type_id;
+
         $this->car->full_name = $request->full_name;
         $this->car->contact_number = $request->contact_number;
         $this->car->vin_number = $request->vin_number;
@@ -72,6 +75,10 @@ class CarInformationController extends Controller
         $this->car->manufacturer = $request->make;
         $this->car->model = $request->model;
         $this->car->mileage = $request->mileage;
+        $this->car->body_style = $request->body_style;
+        $this->car->exterior_color = $request->exterior_color;
+        $this->car->interior_color = $request->interior_color;
+        $this->car->engine = $request->engine;
         $this->car->equipment = $request->equipment;
         $this->car->is_modified = $request->is_modified;
         $this->car->modification_details = $request->modification_details;

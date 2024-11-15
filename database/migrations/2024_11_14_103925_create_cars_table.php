@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('car_category_id')->constrained('car_categories')->onDelete('cascade');
             $table->foreignId('car_transmission_id')->constrained('car_transmissions')->onDelete('cascade');
-
             $table->string('full_name');
             $table->string('contact_number');
             $table->string('vin_number');
@@ -38,7 +37,7 @@ return new class extends Migration
             $table->boolean('is_set_min_price');
             $table->string('price_unit');
             $table->string('bit_price');
-            $table->string('image');
+            $table->string('thumbnail');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

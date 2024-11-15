@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href=" {{ asset('frontend/assets') }}/css/style.css" />
     <link rel="stylesheet" type="text/css" href=" {{ asset('frontend/assets') }}/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href=" {{ asset('frontend/assets') }}/css/toastr.css" />
-    <link
+    <!-- dropify -->
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
     @stack('styles')

@@ -48,6 +48,7 @@ class SellerTypeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'seller_type' => 'required',
         ]);

@@ -7,6 +7,7 @@ use App\Models\AuctionTime;
 use App\Models\Car;
 use App\Models\CarCategory;
 use App\Models\CarTransmission;
+use App\Models\SellerType;
 use App\Models\CMS;
 use App\Models\Feature;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
-    public $allcars,$auctionTime,$carCategories,$carTransmissions,$carDetails;
+    public $allcars,$auctionTime,$carCategories,$carTransmissions,$carDetails,$sellerTypes;
     public function index()
     {
         $this->allcars = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->where('status', 1)->get();
@@ -43,18 +44,22 @@ class HomeController extends Controller
     }
 
     public function sellCar(Request $request) {
+        $this->sellerTypes = SellerType::all();
 
         if ($request->ajax()) {
             $this->carCategories = CarCategory::all();
             $this->carTransmissions = CarTransmission::all();
             return response()->json([
                 'carCats' =>  $this->carCategories,
-                'carTrans' => $this->carTransmissions
+                'carTrans' => $this->carTransmissions,
 
             ]);
         }
 
-        return view('frontend.layouts.sell-car.sell-car');
+        return view('frontend.layouts.sell-car.sell-car',[
+
+            'sellerTypes' => $this->sellerTypes,
+        ]);
     }
 
     public function getCarDetails($id) {

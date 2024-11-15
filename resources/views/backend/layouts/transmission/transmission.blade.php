@@ -20,7 +20,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="CarTransmissionForm">
-                            <input type="hidden" name="id" id="HidenInput">
+                            <input type="hidden" name="id" id="hiddenInput">
                             <div class="mb-3">
                                 <input id="TransmissionTypeInput" type="text" class="form-control" placeholder="Transmission Type" name="transmission_type">
                             </div>
@@ -60,8 +60,9 @@
                 let form = $("#CarTransmissionForm");
                 let url, type;
 
-                let transmissionId = $('#HidenInput').val();
+                let transmissionId = $('#hiddenInput').val();
                 if (transmissionId) {
+                    $('#hiddenInput').val('');
                     url = "{{ route('car-transmission.update', ':id') }}".replace(':id', transmissionId);
                     type = "PUT";
                 } else {
@@ -101,7 +102,7 @@
 
 
         function EditCarTransmission(id, transmission_type) {
-            $('#HidenInput').val(id);
+            $('#hiddenInput').val(id);
             $('#TransmissionTypeInput').val(transmission_type);
             $('#submitCarTransmissionForm').text('Update');
             $('#exampleModal').modal('show');

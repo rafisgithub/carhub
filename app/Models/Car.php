@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Car extends Model
 {
 
-<<<<<<< HEAD
     use HasFactory;
 
     protected $fillable = [
@@ -41,8 +40,6 @@ class Car extends Model
 
     ];
 
-    
-=======
 
     public function user()
     {
@@ -64,6 +61,4 @@ class Car extends Model
         return $this->belongsTo(CarTransmission::class);
     }
 
-
->>>>>>> e2d582df1f7c4e8ab8eba2957e5f3ce610d9291d
 }
