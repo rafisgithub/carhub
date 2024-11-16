@@ -20,9 +20,9 @@
                   <!-- preview--img  -->
                   <form id="UploadProfileForm" action="#" data-aos="fade-up" data-aos-duration="1000" enctype="multipart/form-data">
                     <div class="preview--img">
-                      <img 
+                      <img
                         id="image-preview"
-                        src="{{ asset( $image) }}"
+                        src="{{ asset( $image?$image:'' ) }}"
                         alt=""
                       />
                     </div>
@@ -1734,9 +1734,9 @@
 
 @push('scripts')
   <script>
-   
+
     $(document).ready(function(){
-   
+
          $('#UploadProfileForm').submit(function(e){
             e.preventDefault();
             var formData = new FormData(this);
@@ -1749,7 +1749,7 @@
 
                     if(response){
                       image = response.image;
-                     
+
                         toastr.success(response.message);
                     }else{
                         toastr.error(response.message);
@@ -1758,7 +1758,7 @@
                 cache: false,
                 contentType: false,
                 processData: false
-            }); 
+            });
         });
       $('#upload').change(function () {
       $('#UploadProfileForm').submit();

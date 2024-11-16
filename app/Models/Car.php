@@ -61,4 +61,19 @@ class Car extends Model
         return $this->belongsTo(CarTransmission::class);
     }
 
+    public function sellerType()
+    {
+        return $this->belongsTo(SellerType::class);
+    }
+
+    public function carImages()
+    {
+        return $this->hasMany(CarImage::class);
+    }
+
+    public function carVideos()
+    {
+        return $this->hasMany(CarVideo::class);
+    }
+
 }

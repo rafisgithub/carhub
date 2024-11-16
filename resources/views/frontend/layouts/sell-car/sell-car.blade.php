@@ -1036,8 +1036,11 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="transmission">Car Category</label>
-                                    <select name="category_id" id="SelectTagForCarCategory" >
-
+                                    <select name="category_id" >
+                                        <option selected>Select Car Category</option>
+                                        @foreach ($carCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @endforeach
                                     </select>
                                     <p class="error"></p>
                                     @error('category_id')
@@ -1049,8 +1052,11 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="transmission">Transmission</label>
-                                    <select name="transmission_id" id="SelectTagForTransmission" >
-
+                                    <select name="transmission_id">
+                                        <option selected>Select Transmission</option>
+                                        @foreach ($carTransmissions as $transmission)
+                                        <option value="{{ $transmission->id }}">{{ $transmission->transmission_type }}</option>
+                                        @endforeach
                                     </select>
                                     <p class="error"></p>
                                     @error('transmission_id')
@@ -1070,7 +1076,7 @@ Sell Car
                                         @endforeach
                                     </select>
                                     <p class="error"></p>
-                                   
+
                                 </div>
                             </div>
                             <div class="col-md-7 mt_25">
@@ -1122,7 +1128,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="equipment">Special Options/Equipment</label>
-                                    <textarea name="equipment" id="equipment" placeholder="For example: sport package, long-range battery, FSD or other important factory-installed features "></textarea>
+                                    <textarea class="editor" name="equipment" id="equipment" placeholder="For example: sport package, long-range battery, FSD or other important factory-installed features "></textarea>
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1332,7 +1338,7 @@ Sell Car
                             <div class="col-md-8 mt_25">
                                 <div class="input--group">
                                     <label for="state">State</label>
-                                    <select id="selectTagForState" name="state">
+                                    <select class="nice-select" id="selectTagForState" name="state">
 
                                     </select>
                                 </div>
@@ -1373,7 +1379,7 @@ Sell Car
                             <div class="col-md-8 mt_25">
                                 <div class="input--group">
                                     <label for="state">What is the title’s status?</label>
-                                    <select id="selectTagForTitleStatus" name="title_status">
+                                    <select class="nice-select" id="selectTagForTitleStatus" name="title_status">
 
                                     </select>
                                 </div>
@@ -1446,10 +1452,14 @@ Sell Car
                         <!-- upload box  -->
                         <div class="dash--upload--box">
                             <form action="print-demo.html">
-                                <label for="dash-upload">  
+                                <label for="dash-upload">
                                 <input type="file" class="dropify" id="dash-upload" multiple accept="image/*,video/*" name="files[]" />
-                                                                  
                                 </label>
+                                <div class="files-board">
+                                    <div class="row">
+
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <p>
@@ -1487,56 +1497,82 @@ Sell Car
 
 
     @push('scripts')
+
     <script>
+
         $(document).ready(function() {
 
 
-            $('#SelectTagForCarCategory').niceSelect();
+            // for images and videos preview in the form
 
-            $.ajax({
-                url: "{{ route('sell-car') }}",
-                 method: 'GET',
-                 success: function(response) {
-                    var selectElement = $('#SelectTagForCarCategory');
-                    selectElement.empty();
-                    selectElement.append('<option value="">Select a Car Category</option>')
-                    $.each(response.carCats, function(index, cat) {
-                        selectElement.append('<option value="' + cat.id + '">' + cat.category + '</option>');
-                    });
-                    selectElement.niceSelect('update');
+            $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove':  'Remove',
+                'error':   'Ooops, something wrong happended.'
+            }
+            });
 
+            let allfiles = [];
+            $('#dash-upload').on('change', function() {
+                var files = this.files;
+                var fileReader;
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    fileReader = new FileReader();
+
+                    fileReader.onload = (function(file, index) {
+                        return function(e) {
+                            var fileType = file.type;
+                            var previewElement;
+
+                            if (fileType.startsWith('image/')) {
+                                previewElement = `<div class="col-md-2 preview-container" data-index="${index}">
+                                                    <img src="${e.target.result}" alt="" class="img-fluid">
+                                                    <button class="remove-preview btn btn-danger btn-sm">Remove</button>
+                                                </div>`;
+                            }
+                            else if (fileType.startsWith('video/')) {
+                                previewElement = `<div class="col-md-2 preview-container" data-index="${index}">
+                                                    <video controls class="img-fluid">
+                                                        <source src="${e.target.result}" type="${fileType}">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                    <button class="remove-preview btn btn-danger btn-sm">Remove</button>
+                                                </div>`;
+                            }
+
+                            $('.files-board .row').append(previewElement);
+                        };
+                    })(file, i);
+
+                    fileReader.readAsDataURL(file);
                 }
             });
 
-            $('#SelectTagForTransmission').niceSelect();
+            $('.files-board').on('click', '.remove-preview', function() {
+                $(this).closest('.preview-container').remove();
 
-            $.ajax({
-                url: "{{ route('sell-car') }}",
-                  method: 'GET',
-                  success: function(response) {
-                    console.log(response);
-                    var selectElement = $('#SelectTagForTransmission');
-                    selectElement.empty();
-                    selectElement.append('<option value="">Select Transmission Type</option>')
-                    $.each(response.carTrans, function(index, trans) {
-                        selectElement.append('<option value="' + trans.id + '">' + trans.transmission_type + '</option>');
-                    });
-                    selectElement.niceSelect('update');
-
-                }
             });
 
+            // for the select tags
 
             $('#selectTagForState').niceSelect();
+
             $('#selectTagForTitleStatus').niceSelect();
 
             function updateStates() {
+                // alert('here');
                 const selectedLocation = $('input[name="title_location"]:checked').val();
-                console.log(selectedLocation);
+
+
                 if (!selectedLocation) return;
 
                 let states = [];
                 if (selectedLocation == "Soudi Arabia") {
+
                     states = ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dammam'];
                 } else if (selectedLocation == "Dubai") {
                     states = ['Downtown Dubai', 'Dubai Marina', 'Jumeirah', 'Deira', 'Bur Dubai'];
@@ -1558,16 +1594,17 @@ Sell Car
 
         });
 
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Drag and drop a file here or click',
-                'replace': 'Drag and drop or click to replace',
-                'remove':  'Remove',
-                'error':   'Ooops, something wrong happended.'
-            }
-        });
 
-        
+
+    ClassicEditor
+      .create(document.querySelector('.editor'))
+      .then(editor => {
+          console.log('Editor was initialized', editor);
+      })
+      .catch(error => {
+          console.error(error.stack);
+      });
+
 
     </script>
     @endpush

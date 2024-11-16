@@ -45,28 +45,25 @@ class HomeController extends Controller
 
     public function sellCar(Request $request) {
         $this->sellerTypes = SellerType::all();
-
-        if ($request->ajax()) {
-            $this->carCategories = CarCategory::all();
-            $this->carTransmissions = CarTransmission::all();
-            return response()->json([
-                'carCats' =>  $this->carCategories,
-                'carTrans' => $this->carTransmissions,
-
-            ]);
-        }
+        $this->carCategories = CarCategory::all();
+        $this->carTransmissions = CarTransmission::all();
 
         return view('frontend.layouts.sell-car.sell-car',[
 
             'sellerTypes' => $this->sellerTypes,
+            'carCategories' => $this->carCategories,
+            'carTransmissions' => $this->carTransmissions,
         ]);
     }
 
     public function getCarDetails($id) {
-        $this->carDetails = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->with('user')->where('id',$id)->first();
-        // dd($this->carDetails);
+        $this->carDetails = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->with('sellerType')->with('carImages')->with('carVideos')->with('user.userPublicInformation')->where('id',$id)->first();
+        // dd ($this->carDetails);
+        $autionsEndingSoon = Car::where('status', 1)->orderBy('id', 'desc')->limit(5)->with('auctionTime')->get();
+        // dd($autionsEndingSoon);
         return view('frontend.layouts.car-details.car-details',[
             'carDetails' => $this->carDetails,
+            'autionsEndingSoon' => $autionsEndingSoon,
         ]);
     }
 

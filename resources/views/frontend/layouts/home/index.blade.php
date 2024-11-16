@@ -151,7 +151,7 @@ Home | Saudi Car Hub
                 <!-- car card  -->
                 <div class="car--card">
                     <div class="img--area">
-                        <img class="w-100" src="{{ asset( $allcar->image ) }}" alt="" />
+                        <img class="w-100" src="{{ asset( $allcar->thumbnail ) }}" alt="" />
                     </div>
                     <div class="car--info">
                         <div class="bid--info">

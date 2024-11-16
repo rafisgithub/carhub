@@ -103,6 +103,17 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
+    ClassicEditor
+      .create(document.querySelector('#editor'))
+      .then(editor => {
+          console.log('Editor was initialized', editor);
+      })
+      .catch(error => {
+          console.error(error.stack);
+      });
+
 </script>
 
 @stack('scripts')

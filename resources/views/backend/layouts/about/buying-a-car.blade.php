@@ -34,7 +34,7 @@
 
               <div class="mb-3">
                 <label class="form-label" for="basic-default-message">Description</label>
-                    <textarea name="content" id="editor" >{!! $data->content !!}</textarea>
+                    <textarea name="content" class="editor" >{!! $data->content !!}</textarea>
                     <div class="text-danger">
                         @error('content')
                             {{ $message }}
@@ -82,7 +82,7 @@
 
     <script>
         ClassicEditor
-      .create(document.querySelector('#editor'))
+      .create(document.querySelector('.editor'))
       .then(editor => {
           console.log('Editor was initialized', editor);
       })

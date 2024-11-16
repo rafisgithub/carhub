@@ -33,7 +33,7 @@
               <div class="mb-3">
                 <label class="form-label" for="basic-default-message">Description</label>
 
-                    <textarea name="description" id="editor" >
+                    <textarea name="description" class="editor" >
                         {!! $data->content !!}
                     </textarea>
                     <div class="text-danger">
@@ -67,7 +67,7 @@
 
     <script>
         ClassicEditor
-      .create(document.querySelector('#editor'))
+      .create(document.querySelector('.editor'))
       .then(editor => {
           console.log('Editor was initialized', editor);
       })

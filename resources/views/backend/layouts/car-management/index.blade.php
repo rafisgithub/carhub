@@ -40,7 +40,7 @@
                     {data: 'contact_number', name: 'contact_number'},
                     {data: 'model', name: 'model'},
                     {data: 'vin_number', name: 'vin_number'},
-                    {data: 'image', name: 'image'},
+                    {data: 'thumbnail', name: 'thumbnail'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                     {data: 'status', name: 'status', orderable: false, searchable: false},
 

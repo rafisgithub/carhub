@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CarImage;
+use App\Models\CarVideo;
 use Illuminate\Http\Request;
 
 class CarInformationController extends Controller
@@ -29,75 +31,101 @@ class CarInformationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        dd($request->all());
-        $request->validate([
-            'category_id' => 'required',
-            'transmission_id' => 'required',
-            'seller_type_id' => 'required',
-            'full_name' => 'required',
-            'contact_number' => 'required',
-            'vin_number' => 'required',
-            'year' => 'required',
-            'make' => 'required',
-            'model' => 'required',
-            'mileage' => 'required',
-            'equipment' => 'required',
-            'location' => 'required',
-            'title_location' => 'required',
-            'state' => 'required',
-            'title_status' => 'required',
-            'price_unit' => 'required',
-            'bit_price' => 'required',
-            'image' => 'required',
-        ]);
+{
+    // // Apply input validation
+    $request->validate([
+        'category_id' => 'required',
+        'transmission_id' => 'required',
+        'seller_type_id' => 'required',
+        'seller_type_id' => 'required',
+        'full_name' => 'required',
+        'contact_number' => 'required|',
+        'vin_number' => 'required',
+        'year' => 'required',
+        'make' => 'required',
+        'model' => 'required',
+        'mileage' => 'required',
+        'body_style' => 'required',
+        'exterior_color' => 'required',
+        'interior_color' => 'required',
+        'engine' => 'required',
+        'equipment' => 'required',
+        'location' => 'required',
+        'title_location' => 'required',
+        'price_unit' => 'required',
+        'bit_price' => 'required',
+        'files.*' => 'nullable',
+    ]);
 
-        $this->car = new Car();
-        $image = null;
-        if ($request->hasFile('image')) {
-            $randomize = rand(111111, 999999);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = $randomize . '.' . $extension;
-            $request->file('image')->move('car/images/', $filename);
-            $image = 'car/images/' . $filename;
+    $car = new Car();
+
+    $car->user_id = auth()->user()->id;
+    $car->car_category_id = $request->category_id;
+    $car->car_transmission_id = $request->transmission_id;
+    $car->seller_type_id = $request->seller_type_id;
+    $car->full_name = $request->full_name;
+    $car->contact_number = $request->contact_number;
+    $car->vin_number = $request->vin_number;
+    $car->year = $request->year;
+    $car->manufacturer = $request->make;
+    $car->model = $request->model;
+    $car->mileage = $request->mileage;
+    $car->body_style = $request->body_style;
+    $car->exterior_color = $request->exterior_color;
+    $car->interior_color = $request->interior_color;
+    $car->engine = $request->engine;
+    $car->equipment = $request->equipment;
+    $car->is_modified = $request->is_modified;
+    $car->modification_details = $request->modification_details;
+    $car->is_any_mechanical_cosmetic_flaws = $request->is_any_mechanical_cosmetic_flaws;
+    $car->mechanical_cosmetic_flaws_details = $request->details_of_any_mechanical_cosmetic_flaws;
+    $car->location = $request->location;
+    $car->is_sales_elsewhere = $request->is_sales_elsewhere;
+    $car->title_location = $request->title_location;
+    $car->state = $request->state;
+    $car->is_title_in_name = $request->is_title_in_name;
+    $car->title_status = $request->title_status;
+    $car->is_set_min_price = $request->is_set_min_price;
+    $car->price_unit = $request->price_unit;
+    $car->bit_price = $request->bit_price;
+
+    $car->save();
+
+    if ($request->hasFile('files')) {
+        $files = $request->file('files');
+
+        foreach ($files as $index => $file) {
+            $filename = rand(111111, 999999) . '.' . $file->getClientOriginalExtension();
+
+            if (strpos($file->getMimeType(), 'image') !== false) {
+                $path = 'car/images/';
+                $file->move(public_path($path), $filename);
+
+                if ($index == 0) {
+                    $car->thumbnail = $path . $filename;
+                    $car->save();
+                }
+
+                CarImage::create([
+                    'car_id' => $car->id,
+                    'image' => $path . $filename,
+                ]);
+            }
+
+            elseif (strpos($file->getMimeType(), 'video') !== false) {
+                $path = 'car/videos/';
+                $file->move(public_path($path), $filename);
+
+                CarVideo::create([
+                    'car_id' => $car->id,
+                    'video' => $path . $filename,
+                ]);
+            }
         }
-
-
-        $this->car->user_id = auth()->user()->id;
-        $this->car->car_category_id = $request->category_id;
-        $this->car->car_transmission_id = $request->transmission_id;
-        $this->car->seller_type_id = $request->seller_type_id;
-
-        $this->car->full_name = $request->full_name;
-        $this->car->contact_number = $request->contact_number;
-        $this->car->vin_number = $request->vin_number;
-        $this->car->year = $request->year;
-        $this->car->manufacturer = $request->make;
-        $this->car->model = $request->model;
-        $this->car->mileage = $request->mileage;
-        $this->car->body_style = $request->body_style;
-        $this->car->exterior_color = $request->exterior_color;
-        $this->car->interior_color = $request->interior_color;
-        $this->car->engine = $request->engine;
-        $this->car->equipment = $request->equipment;
-        $this->car->is_modified = $request->is_modified;
-        $this->car->modification_details = $request->modification_details;
-        $this->car->is_any_mechanical_cosmetic_flaws = $request->is_any_mechanical_cosmetic_flaws;
-        $this->car->mechanical_cosmetic_flaws_details = $request->details_of_any_mechanical_cosmetic_flaws;
-        $this->car->location = $request->location;
-        $this->car->is_sales_elsewhere = $request->is_sales_elsewhere;
-        $this->car->title_location = $request->title_location;
-        $this->car->state = $request->state;
-        $this->car->is_title_in_name = $request->is_title_in_name;
-        $this->car->title_status = $request->title_status;
-        $this->car->is_set_min_price = $request->is_set_min_price;
-        $this->car->price_unit = $request->price_unit;
-        $this->car->bit_price = $request->bit_price;
-        $this->car->image = $image;
-        $this->car->save();
-
-        return redirect()->route('auctions')->with('t-success', 'Car Registration successful!');
     }
+
+    return redirect()->route('auctions')->with('t-success', 'Car registration successful!');
+}
 
     /**
      * Display the specified resource.

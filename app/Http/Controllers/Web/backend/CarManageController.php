@@ -22,6 +22,7 @@ class CarManageController extends Controller
 
         if ($request->ajax()) {
             $data = Car::with('user')->get();
+
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -38,12 +39,12 @@ class CarManageController extends Controller
                         }
                     })
 
-                    ->addColumn('image', function ($row) {
+                    ->addColumn('thumbnail', function ($row) {
 
-                        return '<img src=" '. $row->image .' " style="width:13vw; height:15vh;" />';
+                        return '<img src=" '. $row->thumbnail .' " style="width:13vw; height:15vh;" />';
                     })
 
-                    ->rawColumns(['action','image','status'])
+                    ->rawColumns(['action','thumbnail','status'])
                     ->make(true);
         }
         return view('backend.layouts.car-management.index');
@@ -110,7 +111,7 @@ class CarManageController extends Controller
             if($existingAuctionTime) {
                 $existingAuctionTime->delete();
             }
-            
+
         } else {
             $car->status = 1;
 

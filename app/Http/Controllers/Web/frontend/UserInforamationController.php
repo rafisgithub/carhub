@@ -13,6 +13,12 @@ class UserInforamationController extends Controller
         $user_id = auth()->user()->id;
         $user = UserPublicInformation::where('user_id', $user_id)->first();
 
+        if(!$user) {
+            return view('frontend.layouts.profile.index',[
+                'image' => null,
+            ]);
+        }
+
         return view('frontend.layouts.profile.index',[
             'image' => $user->image,
         ]);
@@ -30,11 +36,11 @@ class UserInforamationController extends Controller
         $image_path = '/frontend/users/profile/'.$image_name;
 
     }
-   
-   
+
+
         $user_id = auth()->user()->id;
         $existingUser = UserPublicInformation::where('user_id', $user_id)->first();
-     
+
         if($existingUser) {
             if(file_exists(public_path($existingUser->image))) {
                 unlink(public_path($existingUser->image));
