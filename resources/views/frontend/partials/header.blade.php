@@ -53,6 +53,9 @@
 
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Balance : $ {{ auth()->user()->userWallet->balance ?? '0.00' }}</a></li>
+
+                        <li><a class="dropdown-item" href="{{ route('stripe.index') }}">Rechare Your Wallet</a></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout

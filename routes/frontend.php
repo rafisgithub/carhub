@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\frontend\UserInforamationController;
+use App\Http\Controllers\Web\frontend\StripePaymentController;
 
 
 
@@ -34,6 +35,13 @@ Route::middleware('auth','verified')->group(function () {
         Route::get('user-profile', 'userProfile')->name('profile.index');
         Route::post('user/store/profile', 'updateProfile')->name('user.store.profile');
     });
+    // Stripe Payment
+    Route::controller(StripePaymentController::class)->group(function(){
+        Route::get('stripe-payment-form','openStripePayment')->name('stripe.index');
+        Route::post('stripe-payment','stripePayment')->name('stripe.payment');
+
+    });
+
 
 });
 

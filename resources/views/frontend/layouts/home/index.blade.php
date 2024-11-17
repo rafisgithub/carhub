@@ -349,3 +349,12 @@ Home | Saudi Car Hub
 </section>
 <!-- Testimonial area :: end  -->
 @endsection
+
+
+@push('scripts')
+    <script>
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
+    </script>
+@endpush
