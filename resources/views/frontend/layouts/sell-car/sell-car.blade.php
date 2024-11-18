@@ -1564,10 +1564,11 @@ Sell Car
             $('#selectTagForTitleStatus').niceSelect();
 
             function updateStates() {
-                // alert('here');
+
                 const selectedLocation = $('input[name="title_location"]:checked').val();
 
-
+                // alert(selectedLocation);
+                console.log(selectedLocation);
                 if (!selectedLocation) return;
 
                 let states = [];

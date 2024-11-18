@@ -59,7 +59,7 @@ class HomeController extends Controller
     public function getCarDetails($id) {
         $this->carDetails = Car::with('auctionTime')->with('carCategory')->with('carTransmission')->with('sellerType')->with('carImages')->with('carVideos')->with('user.userPublicInformation')->where('id',$id)->first();
         // dd ($this->carDetails);
-        $autionsEndingSoon = Car::where('status', 1)->orderBy('id', 'desc')->limit(5)->with('auctionTime')->get();
+        $autionsEndingSoon = Car::where('status', 1)->orderBy('id', 'asc')->limit(4)->with('auctionTime')->get();
         // dd($autionsEndingSoon);
         return view('frontend.layouts.car-details.car-details',[
             'carDetails' => $this->carDetails,

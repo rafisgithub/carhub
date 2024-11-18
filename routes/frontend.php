@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\frontend\BidderRegistrationController;
 use App\Http\Controllers\Web\frontend\CarInformationController;
 use App\Http\Controllers\Web\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,14 @@ Route::middleware('auth','verified')->group(function () {
         Route::post('stripe-payment','stripePayment')->name('stripe.payment');
 
     });
+
+    // get user balance
+
+    Route::get('user-balance', [StripePaymentController::class,'getUserBalance'])->name('get.user.balanace');
+
+    // Bidder Registration
+    Route::post('bidder-registration', [BidderRegistrationController::class,'bidderRegistration'])->name('bidder.register');
+
 
 
 });

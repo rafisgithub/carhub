@@ -38,10 +38,27 @@ class StripePaymentController extends Controller
             $wallet = new UserWallet();
             $wallet->user_id = $user_id;
             $wallet->balance = $request->recharge_amount;
+            $wallet->stripeToken = $request->stripeToken;
             $wallet->save();
         }
 
 
         return redirect()->route('home');
+    }
+
+
+    public function getUserBalance(){
+        $user_id = auth()->user()->id;
+        $balance = UserWallet::where('user_id', $user_id)->first();
+        if(!$balance){
+            return response()->json([
+                'status' => true,
+                'balance' => 0
+            ]);
+        }
+        return response()->json([
+            'status' => true,
+            'balance' => $balance->balance
+        ]);
     }
 }

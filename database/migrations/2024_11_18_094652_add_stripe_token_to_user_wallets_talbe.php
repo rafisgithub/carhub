@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_wallets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('balance')->default(0);
-            
-            $table->timestamps();
+        Schema::table('user_wallets', function (Blueprint $table) {
+            $table->string('stripeToken')->after('balance');
+
         });
     }
 
@@ -25,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_wallets');
+        Schema::table('user_wallets', function (Blueprint $table) {
+            $table->dropColumn('stripeToken');
+
+        });
     }
 };

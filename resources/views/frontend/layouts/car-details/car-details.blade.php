@@ -39,7 +39,7 @@ Car Details
                         <div class="row">
                             <div class="col-lg-6 mt_20" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-offset="0">
                                 <a href="#" class="featured--car">
-                                    <img src="{{ asset($carDetails->carImages->first()->image)}}" alt="" />
+                                    <img src="{{ asset( $carDetails->thumbnail)}}" alt="" />
                                 </a>
                             </div>
                             <div class="col-lg-6 slider-right-box">
@@ -385,11 +385,11 @@ Car Details
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                                 <path d="M11.7334 20.4663C6.7677 20.4663 2.74219 16.4408 2.74219 11.4751C2.74219 6.50939 6.7677 2.48389 11.7334 2.48389C16.6991 2.48389 20.7246 6.50939 20.7246 11.4751C20.7246 16.4408 16.6991 20.4663 11.7334 20.4663ZM11.7334 18.6681C15.706 18.6681 18.9264 15.4477 18.9264 11.4751C18.9264 7.50254 15.706 4.28213 11.7334 4.28213C7.76084 4.28213 4.54043 7.50254 4.54043 11.4751C4.54043 15.4477 7.76084 18.6681 11.7334 18.6681ZM12.6325 11.4751H16.229V13.2734H10.8343V6.9795H12.6325V11.4751Z" fill="#141414"></path>
                                             </svg>
-                                                {{ $auction->auctionTime->start_time->diffInDays($auction->auctionTime->end_time, false) }} Days
+                                            {{ (int) now()->diffInDays($auction->auctionTime->end_time, false) }} Days
                                         </p>
                                         <p>
                                             <span>Bid</span>
-                                          {{ $auction->price_unit }} {{ $auction->bit_price }}
+                                            {{ $auction->price_unit }} {{ $auction->bit_price }}
                                         </p>
                                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="star">
                                             <path d="M11.245 4.174C11.4765 3.50808 11.5922 3.17513 11.7634 3.08285C11.9115 3.00298 12.0898 3.00298 12.238 3.08285C12.4091 3.17513 12.5248 3.50808 12.7563 4.174L14.2866 8.57639C14.3525 8.76592 14.3854 8.86068 14.4448 8.93125C14.4972 8.99359 14.5641 9.04218 14.6396 9.07278C14.725 9.10743 14.8253 9.10947 15.0259 9.11356L19.6857 9.20852C20.3906 9.22288 20.743 9.23007 20.8837 9.36432C21.0054 9.48051 21.0605 9.65014 21.0303 9.81569C20.9955 10.007 20.7146 10.2199 20.1528 10.6459L16.4387 13.4616C16.2788 13.5829 16.1989 13.6435 16.1501 13.7217C16.107 13.7909 16.0815 13.8695 16.0757 13.9507C16.0692 14.0427 16.0982 14.1387 16.1563 14.3308L17.506 18.7919C17.7101 19.4667 17.8122 19.8041 17.728 19.9793C17.6551 20.131 17.5108 20.2358 17.344 20.2583C17.1513 20.2842 16.862 20.0829 16.2833 19.6802L12.4576 17.0181C12.2929 16.9035 12.2106 16.8462 12.1211 16.8239C12.042 16.8043 11.9593 16.8043 11.8803 16.8239C11.7908 16.8462 11.7084 16.9035 11.5437 17.0181L7.71805 19.6802C7.13937 20.0829 6.85003 20.2842 6.65733 20.2583C6.49056 20.2358 6.34626 20.131 6.27337 19.9793C6.18915 19.8041 6.29123 19.4667 6.49538 18.7919L7.84503 14.3308C7.90313 14.1387 7.93218 14.0427 7.92564 13.9507C7.91986 13.8695 7.89432 13.7909 7.85123 13.7217C7.80246 13.6435 7.72251 13.5829 7.56262 13.4616L3.84858 10.6459C3.28678 10.2199 3.00588 10.007 2.97101 9.81569C2.94082 9.65014 2.99594 9.48051 3.11767 9.36432C3.25831 9.23007 3.61074 9.22289 4.31559 9.20852L8.9754 9.11356C9.176 9.10947 9.27631 9.10743 9.36177 9.07278C9.43726 9.04218 9.50414 8.99359 9.55657 8.93125C9.61593 8.86068 9.64887 8.76592 9.71475 8.57639L11.245 4.174Z" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -586,14 +586,15 @@ Car Details
         </p>
     </div>
     <!-- credit card info  -->
-    <div class="credit--card--information">
-        <form action="#" class="needs-validation" novalidate>
+  <div class="credit--card--information">
+<form class="needs-validation" novalidate id="BidderRagistraionForm" enctype="multipart/form-data">
+              <input type="hidden" name="car_id" value={{ $carDetails->id }}>
             <h4>Credit Card Information</h4>
             <div class="row">
                 <div class="col-md-6">
                     <div class="input--group">
                         <label for="card-name">Card Name</label>
-                        <input type="text" class="form-control" id="card-name" placeholder="Enter your card name" required />
+                        <input type="text" name="card_name" class="form-control" id="card-name" placeholder="Enter your card name" required />
                         <div class="invalid-feedback">
                             Please enter your card name.
                         </div>
@@ -602,7 +603,7 @@ Car Details
                 <div class="col-md-6">
                     <div class="input--group">
                         <label for="card-num">Card Number</label>
-                        <input type="number" class="form-control" id="card-num" placeholder="Enter your card name" required />
+                        <input type="text" name="card_number" class="form-control" id="card-num" placeholder="Enter your card name" required />
                         <div class="invalid-feedback">
                             Please enter your card number.
                         </div>
@@ -611,7 +612,7 @@ Car Details
                 <div class="col-md-12">
                     <div class="input--group">
                         <label for="zip">Zip or Postal Code</label>
-                        <input type="number" class="form-control" id="zip" placeholder="Enter veiled zip code" required />
+                        <input type="number" class="zip_or_postal_code" class="form-control" id="zip" placeholder="Enter veiled zip code" required />
                         <div class="invalid-feedback">
                             Please enter your zip code.
                         </div>
@@ -620,7 +621,7 @@ Car Details
                 <div class="col-md-6">
                     <div class="input--group">
                         <label for="expiration">Expiration</label>
-                        <input type="date" id="expiration" class="form-control" placeholder="MM/YY" required />
+                        <input type="date" name="expiration" id="expiration" class="form-control" placeholder="MM/YY" required />
                         <div class="invalid-feedback">
                             Please enter the expiration date.
                         </div>
@@ -629,7 +630,7 @@ Car Details
                 <div class="col-md-6">
                     <div class="input--group">
                         <label for="cvc">CVC (3 or 4 digit code)</label>
-                        <input type="number" class="form-control" id="cvc" placeholder="CVC" required />
+                        <input type="number" name="cvc" class="form-control" id="cvc" placeholder="CVC" required />
                         <div class="invalid-feedback">Please enter your CVC.</div>
                     </div>
                 </div>
@@ -640,57 +641,57 @@ Car Details
                             <span>(in the event you win an auction)</span></label>
                         <!-- number--country  -->
                         <div class="number--country">
-                            <select>
-                                <option value="1" selected>US/CA</option>
-                                <option value="2" selected>US/CA</option>
-                                <option value="3" selected>US/CA</option>
-                                <option value="4" selected>US/CA</option>
+                            <select name="country_code">
+                                <option value="US/CA" selected>US/CA</option>
+                                <option value="US/CA" selected>US/CA</option>
+                                <option value="US/CA" selected>US/CA</option>
+                                <option value="US/CA" selected>US/CA</option>
                             </select>
                             <div class="w-100">
-                                <input type="number" class="form-control" required />
+                                <input type="number" name="phone_number" class="form-control" required />
                                 <div class="invalid-feedback">
                                     Please enter your phone number.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="button w-100 mt_45">
+                </div>
+
+                    <a href="#" class="button w-100 mt_45" onclick="GotoNextStep()">
                         Register to Bid
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M0.707159 7.17715C0.307804 7.23213 0 7.57953 0 7.99989C0 8.45846 0.366312 8.83021 0.818182 8.83021L15.1999 8.83021L10.0047 14.0813L9.92528 14.1743C9.68696 14.4989 9.71243 14.9602 10.0023 15.2556C10.3212 15.5805 10.8392 15.5816 11.1594 15.258L17.7477 8.59955C17.787 8.56142 17.8224 8.51937 17.8536 8.47401C18.0766 8.14976 18.0452 7.69994 17.7593 7.41106L11.1593 0.741932L11.0674 0.661737C10.7466 0.421253 10.2921 0.449045 10.0023 0.744461C9.68342 1.06942 9.68454 1.59515 10.0047 1.91871L15.2012 7.16957L0.818182 7.16957L0.707159 7.17715Z" fill="white" />
                         </svg>
-                    </button>
+                    </a>
+                </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <!-- close popup  -->
-    <div class="close--pop">
-        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
-            <path d="M18.4986 16.3209L26.1295 8.68994L28.3098 10.8702L20.6788 18.5011L28.3098 26.1319L26.1295 28.3121L18.4986 20.6813L10.8678 28.3121L8.6875 26.1319L16.3184 18.5011L8.6875 10.8702L10.8678 8.68994L18.4986 16.3209Z" fill="#141414" />
-        </svg>
-    </div>
-</div>
-<!-- popup end  -->
-<div class="step-bid--popup bid--popup common-input">
-    <form action="#" id="bid-form">
+         <!-- close popup  -->
+            <div class="close--pop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+                    <path d="M18.4986 16.3209L26.1295 8.68994L28.3098 10.8702L20.6788 18.5011L28.3098 26.1319L26.1295 28.3121L18.4986 20.6813L10.8678 28.3121L8.6875 26.1319L16.3184 18.5011L8.6875 10.8702L10.8678 8.68994L18.4986 16.3209Z" fill="#141414" />
+                </svg>
+            </div>
+            </div>
+         <!-- popup end  -->
+    <div class="step-bid--popup bid--popup common-input">
         <!-- step  -->
         <div class="step">
             <!-- logo  -->
             <div class="logo">
-                <a href="index.html">
+                <a href="#">
                     <img src=" {{ asset('frontend/assets') }}/images/logo.svg" alt="" />
                 </a>
             </div>
             <!-- car image area  -->
             <div class="car--details">
-                <img src=" {{ asset('frontend/assets') }}/images/car6.png" alt="" />
+                <img src="{{ asset( $carDetails->thumbnail) }}" alt="" />
                 <!-- car title  -->
                 <div class="common-car--title">
-                    <h3>1996 Nissan Skyline GT-R</h3>
+                    <h3>{{ $carDetails->manufacturer }} -- {{ $carDetails->Model }}</h3>
                     <ul>
-                        <li>3 Days</li>
-                        <li>Current Bid $25,000</li>
+                        <li> {{ (int) now()->diffInDays($carDetails->auctionTime->end_time, false) }} Days</li>
+                        <li>Current Bid $ {{ $carDetails->bit_price }}</li>
                     </ul>
                 </div>
                 <div class="input--group">
@@ -698,28 +699,28 @@ Car Details
                         <span>(Minimum bid increment is $250. All bids in USD)</span></label>
                     <!-- usd  -->
                     <div class="usd">
-                        <input type="text" placeholder="USD ($)" />
-                        <input type="text" value="25,0000" />
+                        <input type="text" value="USD" name="curency" />
+                        <input type="number" value="{{ (int)$carDetails->bit_price }}" name="bit_amount" id="CurrntUserBitValue"/>
                     </div>
                 </div>
             </div>
             <!-- buttons  -->
             <div class="buttons">
-                <a href="#" class="button bid-next-button w-100 mt_45">
+                <a href="#" class="button bid-next-button w-100 mt_45" onclick="GetCurrenUsertbitValue()">
                     Place Bid
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.20716 7.17715C0.807804 7.23213 0.5 7.57953 0.5 7.99989C0.5 8.45846 0.866312 8.83021 1.31818 8.83021L15.6999 8.83021L10.5047 14.0813L10.4253 14.1743C10.187 14.4989 10.2124 14.9602 10.5023 15.2556C10.8212 15.5805 11.3392 15.5816 11.6594 15.258L18.2477 8.59955C18.287 8.56142 18.3224 8.51937 18.3536 8.47401C18.5766 8.14976 18.5452 7.69994 18.2593 7.41106L11.6593 0.741932L11.5674 0.661737C11.2466 0.421253 10.7921 0.449045 10.5023 0.744461C10.1834 1.06942 10.1845 1.59515 10.5047 1.91871L15.7012 7.16957L1.31818 7.16957L1.20716 7.17715Z" fill="white" />
                     </svg>
                 </a>
             </div>
-        </div>
-        <div class="step">
+         </div>
+         <div class="step">
             <!-- common-car--title  -->
             <div class="common-car--title">
-                <h3>1996 Nissan Skyline GT-R</h3>
+                <h3>{{ $carDetails->manufacturer }} - {{ $carDetails->model }}</h3>
                 <ul>
-                    <li>3 Days</li>
-                    <li>Current Bid $25,000</li>
+                    <li> {{ (int) now()->diffInDays($carDetails->auctionTime->end_time, false) }} Days</li>
+                    <li>{{ $carDetails->bit_price }}</li>
                 </ul>
             </div>
             <!-- biding information  -->
@@ -728,11 +729,13 @@ Car Details
                 <ul>
                     <li>
                         <p>Your Bid :</p>
-                        <p>$25,750 USD</p>
+                        <p id="yourBitValue" ></p>
                     </li>
                     <li>
                         <p>C&B Buyer’s Fee :</p>
-                        <p>$1,158.75 USD</p>
+                        <p id="CAndBBuerFee"></p>
+                        <input type="hidden" name="buyer_fee" id="CAndBBuerFeeHiddenInput">
+
                     </li>
                 </ul>
                 <!-- more--info -->
@@ -757,9 +760,10 @@ Car Details
                     </p>
                 </div>
             </div>
+
             <!-- button  -->
             <div class="buttons">
-                <button class="button w-100 bid-submit-button mt_50">
+                <button type="submit" class="button w-100 bid-submit-button mt_50">
                     Confirm Bid
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.20716 7.17715C0.807804 7.23213 0.5 7.57953 0.5 7.99989C0.5 8.45846 0.866312 8.83021 1.31818 8.83021L15.6999 8.83021L10.5047 14.0813L10.4253 14.1743C10.187 14.4989 10.2124 14.9602 10.5023 15.2556C10.8212 15.5805 11.3392 15.5816 11.6594 15.258L18.2477 8.59955C18.287 8.56142 18.3224 8.51937 18.3536 8.47401C18.5766 8.14976 18.5452 7.69994 18.2593 7.41106L11.6593 0.741932L11.5674 0.661737C11.2466 0.421253 10.7921 0.449045 10.5023 0.744461C10.1834 1.06942 10.1845 1.59515 10.5047 1.91871L15.7012 7.16957L1.31818 7.16957L1.20716 7.17715Z" fill="white" />
@@ -784,6 +788,76 @@ Car Details
 @push('scripts')
 
 <script>
+    function GotoNextStep() {
+
+        // not empty card number to phone number
+        let cardName = document.getElementById('card-name').value;
+        let cardNumber = document.getElementById('card-num').value;
+        let zip = document.getElementById('zip').value;
+        let expiration = document.getElementById('expiration').value;
+        let cvc = document.getElementById('cvc').value;
+        let phoneNumber = document.querySelector('.number--country input').value;
+
+        if(cardName != '' && cardNumber != '' && zip != '' && expiration != '' && cvc != '' && phoneNumber != '') {
+            $.ajax({
+            url: "{{ route('get.user.balanace') }}",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.balance >= {{ (int)str_replace(',', '', $carDetails->bit_price) * 0.02 }}) {
+
+                    document.querySelector('.step-bid--popup').classList.add('show');
+                    document.querySelector('.register--bid--popup').style.display = 'none';
+                } else {
+                    toastr.error("Check your Balance Please!.Your account have to {{ (int)str_replace(',', '', $carDetails->bit_price) * 0.02 }} USD");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }else {
+        toastr.error("Please fill all the fields");
+    }
+
+
+
+    }
+
+    function GetCurrenUsertbitValue() {
+      let currentUserBitValue = document.getElementById('CurrntUserBitValue').value;
+        document.getElementById('yourBitValue').innerText = `$ ${ currentUserBitValue } USD`;
+        document.getElementById('CAndBBuerFee').innerText = `$ ${ currentUserBitValue * 0.02 } USD`;
+        document.getElementById('CAndBBuerFeeHiddenInput').value = currentUserBitValue * 0.02;
+    }
+
+    $('#BidderRagistraionForm').submit(function(event) {
+        event.preventDefault();
+
+        let data = $('#BidderRagistraionForm').serialize();
+
+        $.ajax({
+            url: "{{ route('bidder.register') }}"
+            , type: "POST"
+            , data: data
+            , dataType: "json"
+            , success: function(data) {
+                if (data.status == true) {
+                    document.querySelector('.biding--information').style.display = 'none';
+                    document.querySelector('.step-bid--popup').style.display = 'none';
+                    console.log(data.data);
+                    // window.location.reload();
+                    toastr.success(data.message);
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+            , error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    })
+
     document.getElementById('morePhotosBox').addEventListener('click', function(event) {
         event.preventDefault();
         document.querySelectorAll('.additional-photos').forEach(function(photo) {
@@ -791,6 +865,13 @@ Car Details
         });
         this.style.display = 'none';
     });
+
+
+    document.getElementById('card-num').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    value = value.match(/.{1,4}/g)?.join(' ') || value;
+    e.target.value = value;
+  });
 
 </script>
 

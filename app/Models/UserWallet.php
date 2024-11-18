@@ -9,6 +9,7 @@ class UserWallet extends Model
     protected $fillable = [
         'user_id',
         'balance',
+        'stripeToken',
     ];
 
     public function user()

@@ -6,10 +6,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 <script src="{{ asset('frontend/assets') }}/js/jquery.nice-select.js"></script>
 <script src="{{ asset('frontend/assets') }}/js/toastr.min.js"></script>
+<script src="{{ asset('frontend/assets') }}/js/ckeditor5.js"></script>
 
 <!-- dropify -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
 
 <script>
