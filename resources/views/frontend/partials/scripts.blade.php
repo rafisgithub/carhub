@@ -104,15 +104,17 @@
         }
     });
 
-
+    document.querySelectorAll('.editor1, .editor2, .editor3').forEach((textarea) => {
     ClassicEditor
-      .create(document.querySelector('#editor'))
-      .then(editor => {
-          console.log('Editor was initialized', editor);
-      })
-      .catch(error => {
-          console.error(error.stack);
-      });
+        .create(textarea)
+        .then(editor => {
+            console.log('Editor was initialized', editor);
+        })
+        .catch(error => {
+            console.error(error.stack);
+        });
+});
+
 
 </script>
 

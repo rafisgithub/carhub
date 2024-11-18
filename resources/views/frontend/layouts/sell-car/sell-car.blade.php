@@ -1128,7 +1128,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="equipment">Special Options/Equipment</label>
-                                    <textarea class="editor" name="equipment" id="equipment" placeholder="For example: sport package, long-range battery, FSD or other important factory-installed features "></textarea>
+                                    <textarea class="editor1" name="equipment" id="equipment" placeholder="For example: sport package, long-range battery, FSD or other important factory-installed features "></textarea>
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1207,13 +1207,13 @@ Sell Car
                                     <label for="modi-textarea">List any modifications, including modification or
                                         removal of the catalytic converters.
                                     </label>
-                                    <textarea modification_details id="modi-textarea" placeholder="Write here....." name="modification_details"></textarea>
+                                    <textarea modification_details id="modi-textarea" class="editor2" placeholder="Write here....." name="modification_details"></textarea>
                                 </div>
                                 <!-- sagnificant mechanical textarea  -->
                                 <div class="sagnificant--textarea mt_25">
                                     <label for="sagnificant-textarea">Please give details
                                     </label>
-                                    <textarea name="details_of_any_mechanical_cosmetic_flaws" id="sagnificant-textarea" placeholder="Write here....." name="any_mechanical_cosmetic_flaws_details"></textarea>
+                                    <textarea class="editor3" name="details_of_any_mechanical_cosmetic_flaws" id="sagnificant-textarea" placeholder="Write here....." name="any_mechanical_cosmetic_flaws_details"></textarea>
                                 </div>
                             </div>
 
@@ -1594,17 +1594,6 @@ Sell Car
             $('input[name="title_location"]').on('change', updateStates);
 
         });
-
-
-
-    ClassicEditor
-      .create(document.querySelector('.editor'))
-      .then(editor => {
-          console.log('Editor was initialized', editor);
-      })
-      .catch(error => {
-          console.error(error.stack);
-      });
 
 
     </script>
