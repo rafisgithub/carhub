@@ -32,7 +32,7 @@ class CarInformationController extends Controller
      */
     public function store(Request $request)
 {
-    // // Apply input validation
+    // dd($request->all());
     $request->validate([
         'category_id' => 'required',
         'transmission_id' => 'required',
@@ -93,26 +93,29 @@ class CarInformationController extends Controller
 
     if ($request->hasFile('files')) {
         $files = $request->file('files');
-
+        $flag = true;
         foreach ($files as $index => $file) {
             $filename = rand(111111, 999999) . '.' . $file->getClientOriginalExtension();
 
             if (strpos($file->getMimeType(), 'image') !== false) {
-                $path = 'car/images/';
-                $file->move(public_path($path), $filename);
 
-                if ($index == 0) {
-                    $car->thumbnail = $path . $filename;
+                if( $flag) {
+                    $thumbnailPath = 'car/thumbnails/';
+                    $file->move(public_path($thumbnailPath), $filename);
+                    $car->thumbnail = $thumbnailPath . $filename;
                     $car->save();
+                    $flag = false;
+                }else{
+
+                    $path = 'car/images/';
+                    $file->move(public_path($path), $filename);
+
+                    CarImage::create([
+                        'car_id' => $car->id,
+                        'image' => $path . $filename,
+                    ]);
                 }
-
-                CarImage::create([
-                    'car_id' => $car->id,
-                    'image' => $path . $filename,
-                ]);
-            }
-
-            elseif (strpos($file->getMimeType(), 'video') !== false) {
+            } elseif (strpos($file->getMimeType(), 'video') !== false) {
                 $path = 'car/videos/';
                 $file->move(public_path($path), $filename);
 

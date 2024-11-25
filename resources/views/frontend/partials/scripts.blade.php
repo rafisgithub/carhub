@@ -105,8 +105,7 @@
     });
 
     document.querySelectorAll('.editor1, .editor2, .editor3').forEach((textarea) => {
-    ClassicEditor
-        .create(textarea)
+    ClassicEditor.create(textarea)
         .then(editor => {
             console.log('Editor was initialized', editor);
         })

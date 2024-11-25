@@ -35,7 +35,7 @@ class Car extends Model
         'is_set_min_price',
         'price_unit',
         'bit_price',
-        'image',
+        'thumbnail',
         'status',
 
     ];

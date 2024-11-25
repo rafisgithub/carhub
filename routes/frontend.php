@@ -19,11 +19,25 @@ Route::middleware('auth','verified')->group(function () {
 
     Route::controller(HomeController::class)->group(function() {
 
-        Route::get('/auctions', 'auctions')->name('auctions');
+        Route::get('/auctions', action: 'auctions')->name('auctions');
         Route::get('/cars-and-bids', 'getCarsAndbid')->name('cars-and-bids');
         Route::get('/sell-car', 'sellCar')->name('sell-car');
         Route::get('/showing-car-details/{id}', 'getCarDetails')->name('car.details');
+        //get.categories
+        Route::get('/get-categories', 'getCategories')->name('get.categories');
+        //get car brands
+        Route::get('/get-car-brands', 'getCarBrands')->name('get.car.brands');
+        //get.all.auctions
+        Route::get('/get-all-auctions', 'getAllAuctions')->name('get.all.auctions');
+        // get all car models
+        Route::get('/get-car-models', 'getCarModels')->name('get.car.models');
+        // filter car auction
 
+        Route::get('/filter-car-auction', 'filterCarAuction')->name('filter.car.auction');
+            // ending soon auctions
+        Route::get('/ending-soon-auctions', 'endingSoonAuctions')->name('ending.soon.auctions');
+        // newly listed auctionsq
+        Route::get('/newly-listed-auctions', 'newlyListedAuctions')->name('newly.listed.auctions');
     });
 
 
@@ -49,6 +63,8 @@ Route::middleware('auth','verified')->group(function () {
 
     // Bidder Registration
     Route::post('bidder-registration', [BidderRegistrationController::class,'bidderRegistration'])->name('bidder.register');
+
+
 
 
 

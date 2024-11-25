@@ -82,7 +82,7 @@ Car Details
                             <path d="M17.0177 16.4449L13.6593 14.4407C13.0743 14.0941 12.5977 13.2599 12.5977 12.5774V8.13574" stroke="#FD7F54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <p>Time Left <strong>2 Days</strong></p>
+                    <p>Time Left <strong>{{ (int) now()->diffInDays($carDetails->auctionTime->end_time, false)  }} Days</strong></p>
                 </div>
                 <!-- single info  -->
                 <div class="single--info">
@@ -94,7 +94,7 @@ Car Details
                             <path d="M16.2383 22.2084V3.79175" stroke="#FD7F54" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <p>High Bid <strong>$185,000</strong></p>
+                    <p>High Bid <strong>$ {{ $heightestBit ? $heightestBit->bit_amount : '' }}</strong></p>
                 </div>
                 <!-- single info  -->
                 <div class="single--info">
@@ -107,7 +107,7 @@ Car Details
                             <path d="M13.0013 23.8334C18.9844 23.8334 23.8346 18.9832 23.8346 13.0001C23.8346 7.017 18.9844 2.16675 13.0013 2.16675C7.01822 2.16675 2.16797 7.017 2.16797 13.0001C2.16797 18.9832 7.01822 23.8334 13.0013 23.8334Z" stroke="#FD7F54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <p>Total Bids <strong>07</strong></p>
+                    <p>Total Bids <strong>{{ $totalBit }}</strong></p>
                 </div>
                 <!-- single info  -->
                 <div class="single--info">
@@ -179,7 +179,11 @@ Car Details
                                 <div class="tt">Seller</div>
                                 <div class="td">
                                     <div class="s-profile">
-                                        <img src="{{ asset( $carDetails->user->userPublicInformation->image?$carDetails->user->userPublicInformation->image:'loading' ) }}" alt="" />
+                                        <img src="{{ $carDetails->user && $carDetails->user->userPublicInformation && $carDetails->user->userPublicInformation->image
+                                            ? asset($carDetails->user->userPublicInformation->image)
+                                            : 'loading' }}"
+                                            alt="User Image"
+                                        />
                                         {{ $carDetails->user->name }}
                                     </div>
                                     <a href="#">Contact</a>
@@ -219,8 +223,13 @@ Car Details
                     <div class="single--review details" data-aos="fade-up" data-aos-duration="1000">
                         <!-- profile  -->
                         <div class="profile">
-                            <img src=" {{ asset( $carDetails->user->userPublicInformation->image?$carDetails->user->userPublicInformation->image:'loading' ) }}" alt="" />
-                            <p>Saudi Cars Hubs</p>
+                            <img
+                            src="{{ $carDetails->user && $carDetails->user->userPublicInformation && $carDetails->user->userPublicInformation->image
+                                    ? asset($carDetails->user->userPublicInformation->image)
+                                    : 'loading' }}"
+                            alt="User Image"
+                        />
+                                                    <p>Saudi Cars Hubs</p>
                         </div>
                         <p class="message">
                             Now THIS is really cool – it's our first Lotus Emira on Cars
@@ -402,7 +411,7 @@ Car Details
                                         </p>
                                         <div class="card--footer">
                                             <p>{{ $auction->model }} | VIN NO {{ $auction->vin_number }}</p>
-                                            <a href="#" class="buttonv2 button">Place a Bid</a>
+                                            <a href="{{ route('car.details', ['id' => $auction->id]) }}" class="buttonv2 button">Place a Bid</a>
                                         </div>
                                     </div>
                                 </div>
@@ -846,8 +855,9 @@ Car Details
                     document.querySelector('.biding--information').style.display = 'none';
                     document.querySelector('.step-bid--popup').style.display = 'none';
                     console.log(data.data);
-                    // window.location.reload();
                     toastr.success(data.message);
+                    window.location.reload();
+
                 } else {
                     toastr.error(data.message);
                 }

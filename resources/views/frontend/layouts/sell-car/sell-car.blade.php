@@ -965,7 +965,7 @@ Sell Car
                                 <!-- input group  -->
                                 <div class="input--group">
                                     <label for="fname">Full Name</label>
-                                    <input  name="full_name" id="fname" type="text" placeholder="Enter your card name" />
+                                    <input required name="full_name" id="fname" type="text" placeholder="Enter your card name" />
                                     <!-- invalid message  -->
                                     <p class="error"></p>
                                 </div>
@@ -974,7 +974,7 @@ Sell Car
                                 <!-- input group  -->
                                 <div class="input--group">
                                     <label for="num">Contact Number</label>
-                                    <input  name="contact_number" id="num" type="text" placeholder="Enter your contact number" />
+                                    <input required name="contact_number" id="num" type="text" placeholder="Enter your contact number" />
                                     <!-- invalid message  -->
                                     <p class="error"></p>
                                 </div>
@@ -991,7 +991,7 @@ Sell Car
                             <!-- input--group  -->
                             <div class="input--group mt_25">
                                 <label for="vin-number">VIN Number</label>
-                                <input  name="vin_number" id="vin-number" type="number" placeholder="Enter VIN number" />
+                                <input required name="vin_number" id="vin-number" type="number" placeholder="Enter VIN number" />
                                 <!-- invalid message  -->
                                 <p class="error"></p>
                             </div>
@@ -1018,7 +1018,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="make">Make</label>
-                                    <input  name="make" id="make" type="text" placeholder="Make" />
+                                    <input required name="make" id="make" type="text" placeholder="Make" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1027,7 +1027,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="model">Model</label>
-                                    <input  name="model" id="model" type="text" placeholder="Model" />
+                                    <input required name="model" id="model" type="text" placeholder="Model" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1083,7 +1083,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="mileage">Mileage <span>(in miles)</span></label>
-                                    <input  name="mileage" id="mileage" type="text" placeholder="Enter your car mileage" />
+                                    <input required name="mileage" id="mileage" type="text" placeholder="Enter your car mileage" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1092,7 +1092,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="bodyStyle">Body Style</label>
-                                    <input  name="body_style" id="bodyStyle" type="text" placeholder="Enter your car body style" />
+                                    <input required name="body_style" id="bodyStyle" type="text" placeholder="Enter your car body style" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1101,7 +1101,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="Exteriorcolor">Exterior color</label>
-                                    <input  name="exterior_color" id="Exteriorcolor" type="text" placeholder="Enter your car Exterior color" />
+                                    <input required name="exterior_color" id="Exteriorcolor" type="text" placeholder="Enter your car Exterior color" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1110,7 +1110,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="InteriorColor">Interior color</label>
-                                    <input  name="interior_color" id="InteriorColor" type="text" placeholder="Enter your car Interior color" />
+                                    <input required name="interior_color" id="InteriorColor" type="text" placeholder="Enter your car Interior color" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1119,7 +1119,7 @@ Sell Car
                                 <!-- input--group  -->
                                 <div class="input--group">
                                     <label for="InteriorColor">Engine</label>
-                                    <input  name="engine" id="InteriorColor" type="text" placeholder="Enter your car Engine" />
+                                    <input required name="engine" id="InteriorColor" type="text" placeholder="Enter your car Engine" />
                                     <!-- error message  -->
                                     <p class="error"></p>
                                 </div>
@@ -1141,7 +1141,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="completely-stock" type="radio" name="is_modified" value="0" />
+                                            <input required id="completely-stock" type="radio" name="is_modified" value="0" />
                                             <label for="completely-stock">
                                                 Completely Stock
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1152,7 +1152,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="modified" type="radio" name="is_modified" value="1" />
+                                            <input required id="modified" type="radio" name="is_modified" value="1" />
                                             <label for="modified">
                                                 Modified
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1176,7 +1176,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  name="is_any_mechanical_cosmetic_flaws" id="sag-yes" type="radio" value="1" />
+                                            <input required name="is_any_mechanical_cosmetic_flaws" id="sag-yes" type="radio" value="1" />
                                             <label for="sag-yes">
                                                 Yes
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1187,7 +1187,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  name="is_any_mechanical_cosmetic_flaws" id="sag-no" type="radio" value="0" />
+                                            <input required name="is_any_mechanical_cosmetic_flaws" id="sag-no" type="radio" value="0" />
                                             <label for="sag-no">
                                                 No
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1224,7 +1224,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="locate-saudi" type="radio" name="location" value="Saudi" />
+                                            <input required id="locate-saudi" type="radio" name="location" value="Saudi" />
                                             <label for="locate-saudi">
                                                 Saudi
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1235,7 +1235,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="locate-arab" type="radio" name="location" value="Arab Amirat" />
+                                            <input required id="locate-arab" type="radio" name="location" value="Arab Amirat" />
                                             <label for="locate-arab">
                                                 Arab Amirat
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1256,7 +1256,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="sale-yes" type="radio" name="is_sales_elsewhere" value="1" />
+                                            <input required id="sale-yes" type="radio" name="is_sales_elsewhere" value="1" />
                                             <label for="sale-yes">
                                                 Yes
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1267,7 +1267,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="sale-no" type="radio" name="is_sales_elsewhere" value="0" />
+                                            <input required id="sale-no" type="radio" name="is_sales_elsewhere" value="0" />
                                             <label for="sale-no">
                                                 No
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1310,7 +1310,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="audi-car" type="radio" name="title_location" value="Soudi Arabia" onclick="updateStates()" />
+                                            <input required id="audi-car" type="radio" name="title_location" value="Soudi Arabia" onclick="updateStates()" />
                                             <label for="audi-car">
                                                 Soudi
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1321,7 +1321,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="toyota" type="radio" name="title_location" value="Dubai" onclick="updateStates()" />
+                                            <input required id="toyota" type="radio" name="title_location" value="Dubai" onclick="updateStates()" />
                                             <label for="toyota">
                                                 Dubai
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1351,7 +1351,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="named-yes" type="radio" name="is_title_in_name" value="1" />
+                                            <input required id="named-yes" type="radio" name="is_title_in_name" value="1" />
                                             <label for="named-yes">
                                                 Yes
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1362,7 +1362,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="named-no" type="radio" name="is_title_in_name" value="0" />
+                                            <input required id="named-no" type="radio" name="is_title_in_name" value="0" />
                                             <label for="named-no">
                                                 No
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1403,7 +1403,7 @@ Sell Car
                                     <div class="radio--options">
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="minimum-yes" type="radio" name="is_set_min_price" value="1" />
+                                            <input required id="minimum-yes" type="radio" name="is_set_min_price" value="1" />
                                             <label for="minimum-yes">
                                                 Yes
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1414,7 +1414,7 @@ Sell Car
                                         </div>
                                         <!-- input group  -->
                                         <div class="input--group">
-                                            <input  id="minimum-no" type="radio" name="is_set_min_price" value="0" />
+                                            <input required id="minimum-no" type="radio" name="is_set_min_price" value="0" />
                                             <label for="minimum-no">
                                                 No
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1433,8 +1433,8 @@ Sell Car
                                 <label for="set-price">Set Price
                                     <span>(Minimum bid increment is $250. All bids in USD)</span></label>
                                 <div class="set-inputs">
-                                    <input  type="text" placeholder="USD ($)" name="price_unit" />
-                                    <input  type="text" value="25,0000" name="bit_price" />
+                                    <input required type="text" placeholder="USD ($)" name="price_unit" />
+                                    <input required type="number" value="250000" name="bit_price" />
                                 </div>
                             </div>
                         </div>
@@ -1453,7 +1453,7 @@ Sell Car
                         <div class="dash--upload--box">
                             <form action="print-demo.html">
                                 <label for="dash-upload">
-                                <input type="file" class="dropify" id="dash-upload" multiple accept="image/*,video/*" name="files[]" />
+                                <input required type="file" class="dropify" id="dash-upload" multiple accept="image/*,video/*" name="files[]" />
                                 </label>
                                 <div class="files-board">
                                     <div class="row">

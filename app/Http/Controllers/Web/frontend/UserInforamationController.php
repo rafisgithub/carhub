@@ -12,7 +12,7 @@ class UserInforamationController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = UserPublicInformation::where('user_id', $user_id)->first();
-
+        // dd($user);
         if(!$user) {
             return view('frontend.layouts.profile.index',[
                 'image' => null,

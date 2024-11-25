@@ -37,7 +37,7 @@ return new class extends Migration
             $table->boolean('is_set_min_price');
             $table->string('price_unit');
             $table->string('bit_price');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

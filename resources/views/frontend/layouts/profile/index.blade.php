@@ -57,7 +57,7 @@
                       data-aos-duration="1000"
                       data-aos-delay="100"
                     >
-                      Jason Mark
+                     {{ auth()->user()->name }}
                     </h1>
                     <ul
                       data-aos="fade-up"
