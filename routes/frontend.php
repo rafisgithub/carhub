@@ -49,6 +49,16 @@ Route::middleware('auth','verified')->group(function () {
     Route::controller(UserInforamationController::class)->group(function() {
         Route::get('user-profile', 'userProfile')->name('profile.index');
         Route::post('user/store/profile', 'updateProfile')->name('user.store.profile');
+        // store user public information
+        Route::post('store-public-information', 'storePublicInformation')->name('store.user.public.information');
+        // get user public information
+        Route::get('get-public-information', 'getPublicInformation')->name('get.user.public.information');
+        // store user private information
+        Route::post('store-private-information', 'storePrivateInformation')->name('store.user.private.information');
+        // get user private information
+        Route::get('get-private-information', 'getPrivateInformation')->name('get.user.private.information');
+        // delete user account
+        Route::delete('delete-user-account', 'deleteUserAccount')->name('delete.user.account');
     });
     // Stripe Payment
     Route::controller(StripePaymentController::class)->group(function(){

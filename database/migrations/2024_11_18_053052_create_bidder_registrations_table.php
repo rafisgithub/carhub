@@ -18,13 +18,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
-            $table->string('card_name');
-            $table->string('card_number');
-            $table->string('phone_number');
-            $table->string('cvc');
-            $table->string('country_code');
-            $table->string('expiration');
-            $table->string('curency');
+            $table->string('card_name')->nullable();
+            $table->string('card_number')->nullable( );
+            $table->string('phone_number')->nullable();
+            $table->string('cvc')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('expiration')->nullable();
+            $table->string('curency')->nullable();
             $table->string('bit_amount');
             $table->string('buyer_fee');
 

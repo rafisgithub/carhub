@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserPublicInformation extends Model
 {
-    protected $fillable = ['user_id', 'image'];
+    protected $fillable = ['user_id', 'image','full_name','contact_number','address','biography'];
 
     public function user()
     {

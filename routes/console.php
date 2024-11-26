@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Schedule;
 // // I need to send notification  who wins the auction ..there is is a table name bidder_registration and auction_times from this find whcih auction has finished and then find the highest bidder from bidder_registration table and send notification to tha
 
 
-Schedule::command('notification:for-auction-winner')->everyMinute();
+Schedule::command('notification:for-auction-winner')->everySecond();

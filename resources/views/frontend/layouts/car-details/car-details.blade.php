@@ -600,49 +600,7 @@ Car Details
               <input type="hidden" name="car_id" value={{ $carDetails->id }}>
             <h4>Credit Card Information</h4>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="input--group">
-                        <label for="card-name">Card Name</label>
-                        <input type="text" name="card_name" class="form-control" id="card-name" placeholder="Enter your card name" required />
-                        <div class="invalid-feedback">
-                            Please enter your card name.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input--group">
-                        <label for="card-num">Card Number</label>
-                        <input type="text" name="card_number" class="form-control" id="card-num" placeholder="Enter your card name" required />
-                        <div class="invalid-feedback">
-                            Please enter your card number.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="input--group">
-                        <label for="zip">Zip or Postal Code</label>
-                        <input type="number" class="zip_or_postal_code" class="form-control" id="zip" placeholder="Enter veiled zip code" required />
-                        <div class="invalid-feedback">
-                            Please enter your zip code.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input--group">
-                        <label for="expiration">Expiration</label>
-                        <input type="date" name="expiration" id="expiration" class="form-control" placeholder="MM/YY" required />
-                        <div class="invalid-feedback">
-                            Please enter the expiration date.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input--group">
-                        <label for="cvc">CVC (3 or 4 digit code)</label>
-                        <input type="number" name="cvc" class="form-control" id="cvc" placeholder="CVC" required />
-                        <div class="invalid-feedback">Please enter your CVC.</div>
-                    </div>
-                </div>
+
                 <div class="col-12">
                     <!-- number--wrap  -->
                     <div class="number--wrap input--group">
@@ -781,7 +739,7 @@ Car Details
                 <a href="#" class="button w-100 mt_25 bid-cancle">Cancle</a>
             </div>
         </div>
-    </form>
+</form>
     <!-- close popup  -->
     <div class="close--pop">
         <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
@@ -800,14 +758,10 @@ Car Details
     function GotoNextStep() {
 
         // not empty card number to phone number
-        let cardName = document.getElementById('card-name').value;
-        let cardNumber = document.getElementById('card-num').value;
-        let zip = document.getElementById('zip').value;
-        let expiration = document.getElementById('expiration').value;
-        let cvc = document.getElementById('cvc').value;
+      
         let phoneNumber = document.querySelector('.number--country input').value;
 
-        if(cardName != '' && cardNumber != '' && zip != '' && expiration != '' && cvc != '' && phoneNumber != '') {
+        if(phoneNumber != '') {
             $.ajax({
             url: "{{ route('get.user.balanace') }}",
             type: "GET",
