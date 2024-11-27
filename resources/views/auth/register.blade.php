@@ -110,7 +110,7 @@
                             <p>Or</p>
                         </div>
                         <!-- ssl login  -->
-                        <a href="#" class="ssl--login">
+                        <a href="{{ route('google.redirect') }}" class="ssl--login">
                             <img src=" {{ asset('frontend/assets') }}/images/google.svg" alt="google" />
                             Sign Up with Google
                         </a>
